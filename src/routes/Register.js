@@ -17,7 +17,7 @@ const Register = () => {
 	});
 
 	return (
-		<Container>
+		<Container text>
 			<Header textAlign="center">Register </Header>
 			<Form onSubmit={formik.handleSubmit}>
 				<Form.Field>
@@ -83,18 +83,18 @@ const Register = () => {
 						type="password"
 					/>
 				</Form.Field>
-				<Form.Group>
-					<Button type="submit">Submit</Button>
-					<Link
-						to="/login"
-						style={{
-							marginTop: 8,
-							marginLeft: 10,
-						}}
-					>
-						Already a member?
-					</Link>
-				</Form.Group>
+				<Button primary type="submit">
+					Submit
+				</Button>
+				<Link
+					to="/login"
+					style={{
+						marginTop: 8,
+						marginLeft: 10,
+					}}
+				>
+					Already a member
+				</Link>
 			</Form>
 		</Container>
 	);
