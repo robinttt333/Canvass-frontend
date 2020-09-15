@@ -1,37 +1,58 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Container, Button, Form, Header } from "semantic-ui-react";
+import { Message, Container, Button, Form, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import LoginSchema from "../formValidations/Login";
+import { LOGIN } from "../graphql/User";
+import { useMutation } from "@apollo/client";
 
 const Login = () => {
+	const [login] = useMutation(LOGIN);
+	const [resErr, setResErr] = React.useState({});
+
 	const formik = useFormik({
 		initialValues: {
-			email: "",
+			usernameOrEmail: "",
 			password: "",
 		},
-		onSubmit: (values) => console.log(values),
+
+		onSubmit: async ({ usernameOrEmail, password }) => {
+			const {
+				data: {
+					login: { error },
+				},
+			} = await login({
+				variables: {
+					usernameOrEmail,
+					password,
+				},
+			});
+			if (!!error) {
+				setResErr(error);
+			} else {
+				setResErr({});
+			}
+		},
 		validationSchema: LoginSchema,
 	});
 
 	return (
 		<Container text>
 			<Header textAlign="center">Login </Header>
-			<Form onSubmit={formik.handleSubmit}>
+			<Form onSubmit={formik.handleSubmit} error={true}>
 				<Form.Field>
 					<Form.Input
 						error={
-							formik.errors.email && formik.touched.email
-								? { content: formik.errors.email, pointing: "below" }
+							formik.errors.usernameOrEmail && formik.touched.usernameOrEmail
+								? { content: formik.errors.usernameOrEmail, pointing: "below" }
 								: null
 						}
-						value={formik.values.email}
-						label="Email"
+						value={formik.values.usernameOrEmail}
+						label="Username or Email"
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
-						placeholder="Enter you email"
-						name="email"
-						type="email"
+						placeholder="Enter you email/userame"
+						name="usernameOrEmail"
 					/>
 				</Form.Field>
 				<Form.Field>
@@ -51,7 +72,7 @@ const Login = () => {
 					/>
 				</Form.Field>
 				<Button primary type="submit">
-					Submit
+					Login
 				</Button>
 				<Link
 					to="/register"
@@ -62,6 +83,11 @@ const Login = () => {
 				>
 					Not a member yet?
 				</Link>
+				<Message
+					error
+					header={resErr && resErr.path && resErr.path.toUpperCase()}
+					content={resErr && resErr.message}
+				/>
 			</Form>
 		</Container>
 	);

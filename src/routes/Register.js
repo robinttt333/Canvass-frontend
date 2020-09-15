@@ -1,10 +1,17 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Container, Button, Form, Header } from "semantic-ui-react";
+import { Message, Container, Button, Form, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import RegisterSchema from "../formValidations/Register";
+import { CREATE_USER_MUTATION } from "../graphql/User";
+import { useMutation } from "@apollo/client";
+import RegisterSuccessModal from "../modals/RegisterSuccess";
 
 const Register = () => {
+	const [createUser] = useMutation(CREATE_USER_MUTATION);
+	const [resErr, setResErr] = React.useState({});
+	const [open, setOpen] = React.useState(false);
+
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -12,14 +19,32 @@ const Register = () => {
 			password: "",
 			password1: "",
 		},
-		onSubmit: (values) => console.log(values),
+		onSubmit: async ({ email, username, password }) => {
+			const {
+				data: {
+					createUser: { ok, error },
+				},
+			} = await createUser({
+				variables: {
+					email,
+					username,
+					password,
+				},
+			});
+			if (!ok) {
+				setResErr(error);
+			} else {
+				setResErr({});
+				setOpen(true);
+			}
+		},
 		validationSchema: RegisterSchema,
 	});
 
 	return (
 		<Container text>
 			<Header textAlign="center">Register </Header>
-			<Form onSubmit={formik.handleSubmit}>
+			<Form onSubmit={formik.handleSubmit} error={!!resErr}>
 				<Form.Field>
 					<Form.Input
 						error={
@@ -84,7 +109,7 @@ const Register = () => {
 					/>
 				</Form.Field>
 				<Button primary type="submit">
-					Submit
+					Register
 				</Button>
 				<Link
 					to="/login"
@@ -95,7 +120,13 @@ const Register = () => {
 				>
 					Already a member
 				</Link>
+				<Message
+					error
+					header={resErr && resErr.path && resErr.path.toUpperCase()}
+					content={resErr && resErr.message}
+				/>
 			</Form>
+			<RegisterSuccessModal open={open} setOpen={setOpen} />
 		</Container>
 	);
 };
