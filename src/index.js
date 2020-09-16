@@ -16,6 +16,7 @@ ReactDOM.render(
 			<Route path="/register" exact component={Register} />
 			<Route path="/login" exact component={Login} />
 			<PrivateRoute path="/profile/:userId" exact component={Profile} />
+			<PrivateRoute path="/name" exact component={Profile} />
 		</Router>
 	</ApolloProvider>,
 	document.getElementById("root")
