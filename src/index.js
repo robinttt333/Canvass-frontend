@@ -7,6 +7,7 @@ import Register from "./routes/Register";
 import Login from "./routes/Login";
 import client from "./apollo";
 import { ApolloProvider } from "@apollo/client";
+import Profile from "./routes/Profile";
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
@@ -16,6 +17,9 @@ ReactDOM.render(
 			</Route>
 			<Route path="/login" exact>
 				<Login />
+			</Route>
+			<Route path="/profile/:userId" exact>
+				<Profile />
 			</Route>
 		</Router>
 	</ApolloProvider>,
