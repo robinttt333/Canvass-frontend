@@ -6,7 +6,6 @@ import { Grid, Segment } from "semantic-ui-react";
 import { GET_PROFILE_QUERY } from "../graphql/Profile";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-
 const ProfileWrapper = styled.div`
 	padding: 10px;
 `;

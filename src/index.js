@@ -8,19 +8,14 @@ import Login from "./routes/Login";
 import client from "./apollo";
 import { ApolloProvider } from "@apollo/client";
 import Profile from "./routes/Profile";
+import PrivateRoute from "./routes/PrivateRoute";
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<Router>
-			<Route path="/register" exact>
-				<Register />
-			</Route>
-			<Route path="/login" exact>
-				<Login />
-			</Route>
-			<Route path="/profile/:userId" exact>
-				<Profile />
-			</Route>
+			<Route path="/register" exact component={Register} />
+			<Route path="/login" exact component={Login} />
+			<PrivateRoute path="/profile/:userId" exact component={Profile} />
 		</Router>
 	</ApolloProvider>,
 	document.getElementById("root")
