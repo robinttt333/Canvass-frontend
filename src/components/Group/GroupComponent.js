@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import { Button, Form, Segment, Header } from "semantic-ui-react";
-import GroupDescription from "../components/GroupDescription";
+import GroupDescription from "./GroupDescription";
+import NewPost from "./NewPost";
 
 const GroupWrapper = styled.div`
 	grid-column-start: 2;
@@ -29,13 +29,7 @@ const Group = ({
 				description={description}
 				visible={visible}
 			/>
-			<Segment>
-				<Header>Want to share something ? </Header>
-				<Form reply>
-					<Form.TextArea rows="8" />
-					<Button content="Post" labelPosition="left" icon="edit" primary />
-				</Form>
-			</Segment>
+			<NewPost />
 		</GroupWrapper>
 	);
 };

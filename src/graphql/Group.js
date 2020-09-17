@@ -6,6 +6,9 @@ const GET_GROUP_QUERY = gql`
 			name
 			members {
 				username
+				profile {
+					dp
+				}
 			}
 			description
 			image

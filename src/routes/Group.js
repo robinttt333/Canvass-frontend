@@ -1,8 +1,8 @@
 import React from "react";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import GroupWrapper from "../components/GroupWrapper";
-import GroupComponent from "../components/GroupComponent";
+import GroupPageWrapper from "../components/Group/GroupPageWrapper";
+import GroupComponent from "../components/Group/GroupComponent";
 import GET_GROUP_QUERY from "../graphql/Group";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
@@ -18,7 +18,7 @@ const Group = () => {
 	} = data;
 	const visible = data.getGroup.public;
 	return (
-		<GroupWrapper>
+		<GroupPageWrapper>
 			<LeftSidebar />
 			<GroupComponent
 				admin={admin}
@@ -30,7 +30,7 @@ const Group = () => {
 				visible={visible}
 			/>
 			<RightSidebar members={members} />
-		</GroupWrapper>
+		</GroupPageWrapper>
 	);
 };
 export default Group;
