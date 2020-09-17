@@ -1,15 +1,15 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Message, Container, Button, Form, Header } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import LoginSchema from "../formValidations/Login";
 import { LOGIN } from "../graphql/User";
 import { useMutation } from "@apollo/client";
 
 const Login = () => {
 	const [login] = useMutation(LOGIN);
-	const [resErr, setResErr] = React.useState({});
-
+	const [resErr, setResErr] = React.useState(null);
+	const history = useHistory();
 	const formik = useFormik({
 		initialValues: {
 			usernameOrEmail: "",
@@ -27,10 +27,11 @@ const Login = () => {
 					password,
 				},
 			});
-			if (!!error) {
+			if (error) {
 				setResErr(error);
 			} else {
-				setResErr({});
+				setResErr(null);
+				history.push("/group/1");
 			}
 		},
 		validationSchema: LoginSchema,
@@ -39,7 +40,7 @@ const Login = () => {
 	return (
 		<Container text>
 			<Header textAlign="center">Login </Header>
-			<Form onSubmit={formik.handleSubmit} error={true}>
+			<Form onSubmit={formik.handleSubmit} error={resErr}>
 				<Form.Field>
 					<Form.Input
 						error={

@@ -14,7 +14,12 @@ const Navbar = () => {
 	const { activeItem } = state;
 
 	return (
-		<Menu inverted attached="top" style={{ borderRadius: "0px" }}>
+		<Menu
+			fixed="top"
+			inverted
+			size="large"
+			style={{ borderRadius: "0px", height: "50px" }}
+		>
 			<Menu.Item
 				name="editorials"
 				active={activeItem === "editorials"}

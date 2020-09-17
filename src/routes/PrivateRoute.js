@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 // render all private routes with navbar
 const PrivateRoute = ({ component: Component, ...rest }) => {
 	const user = getUserfromCookie();
-	console.log(user);
 	return (
 		<Route
 			{...rest}
