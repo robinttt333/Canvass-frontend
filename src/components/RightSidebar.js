@@ -3,8 +3,10 @@ import React from "react";
 import GroupMembersList from "./Group/GroupMembersList";
 
 const RightSidebarWrapper = styled.div`
-	grid-column-start: 3;
-	background: red;
+	position: "fixed";
+	height: "100%";
+	width: "25.5%";
+	right: "0";
 `;
 
 const RightSidebar = ({ members }) => {

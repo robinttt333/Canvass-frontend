@@ -1,6 +1,6 @@
 import React from "react";
 import hdate from "human-date";
-import { Grid, Segment, Icon, Card, Image } from "semantic-ui-react";
+import { Grid, Icon, Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import PlainSegment from "../PlainSegment";
 
@@ -13,7 +13,7 @@ const GroupDescription = ({
 	admin,
 	description,
 }) => (
-	<PlainSegment placeholder style={{ border: "none" }}>
+	<PlainSegment placeholder style={{ border: "none", background: "white" }}>
 		<Grid verticalAlign="middle">
 			<Image src={image} />
 			<Grid.Column width={4}>

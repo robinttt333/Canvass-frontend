@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import React from "react";
 import GroupDescription from "./GroupDescription";
-import NewPost from "./NewPost";
+import NewPost from "../Post/NewPost";
+import PostList from "../Post/PostList";
 
 const GroupWrapper = styled.div`
 	grid-column-start: 2;
 	height: 100%;
-	background: #e6f1f5;
+	background: white;
 `;
 
 const Group = ({
@@ -30,6 +31,7 @@ const Group = ({
 				visible={visible}
 			/>
 			<NewPost />
+			<PostList />
 		</GroupWrapper>
 	);
 };
