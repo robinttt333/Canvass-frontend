@@ -5,7 +5,7 @@ import hdate from "human-date";
 export default ({ username, dp, status, email, createdAt }) => (
 	<Grid.Column width={4}>
 		<Card>
-			<Image src={`http://localhost:4000/files/${dp}`} wrapped ui={false} />
+			<Image src={dp} wrapped ui={false} />
 			<Card.Content>
 				<Card.Header>{username}</Card.Header>
 				<Card.Meta>
