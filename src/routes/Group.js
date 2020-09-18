@@ -6,13 +6,20 @@ import GroupComponent from "../components/Group/GroupComponent";
 import GET_GROUP_QUERY from "../graphql/Group";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import { Loader, Dimmer } from "semantic-ui-react";
 
 const Group = () => {
 	const { groupId } = useParams();
 	const { loading, data } = useQuery(GET_GROUP_QUERY, {
 		variables: { groupId: parseInt(groupId) },
 	});
-	if (loading) return null;
+	if (loading)
+		return (
+			<Dimmer inverted active>
+				<Loader>Loading</Loader>
+			</Dimmer>
+		);
+
 	const {
 		getGroup: { image, admin, createdAt, description, members, name },
 	} = data;

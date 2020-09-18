@@ -8,6 +8,27 @@ export const CREATE_POST_MUTATION = gql`
 				path
 				message
 			}
+			post {
+				content
+				createdAt
+				id
+				likes
+				liked
+				author {
+					username
+					profile {
+						dp
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const TOGGLE_LIKE_MUTATION = gql`
+	mutation($postId: Int!) {
+		toggleLike(postId: $postId) {
+			ok
 		}
 	}
 `;
@@ -18,6 +39,8 @@ export const GET_POSTS_QUERY = gql`
 			content
 			createdAt
 			id
+			likes
+			liked
 			author {
 				username
 				profile {
@@ -34,6 +57,8 @@ export const NEW_POST_SUBSCRIPTION = gql`
 			content
 			createdAt
 			id
+			likes
+			liked
 			author {
 				username
 				profile {
