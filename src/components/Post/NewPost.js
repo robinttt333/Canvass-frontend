@@ -22,7 +22,7 @@ const NewPost = () => {
 		onSubmit: async (e) => {
 			const {
 				data: {
-					createPost: { error, ok, post },
+					createPost: { error, ok },
 				},
 			} = await createPost({
 				variables: {
@@ -36,7 +36,6 @@ const NewPost = () => {
 			} else {
 				formik.errors.content = error.message;
 			}
-			console.log(post);
 		},
 	});
 	return (

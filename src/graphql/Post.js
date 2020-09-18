@@ -8,16 +8,6 @@ export const CREATE_POST_MUTATION = gql`
 				path
 				message
 			}
-			post {
-				content
-				createdAt
-				author {
-					username
-					profile {
-						dp
-					}
-				}
-			}
 		}
 	}
 `;
@@ -25,6 +15,22 @@ export const CREATE_POST_MUTATION = gql`
 export const GET_POSTS_QUERY = gql`
 	query($groupId: Int!) {
 		getPosts(groupId: $groupId) {
+			content
+			createdAt
+			id
+			author {
+				username
+				profile {
+					dp
+				}
+			}
+		}
+	}
+`;
+
+export const NEW_POST_SUBSCRIPTION = gql`
+	subscription OnPostAdded($groupId: Int!) {
+		postAdded(groupId: $groupId) {
 			content
 			createdAt
 			id

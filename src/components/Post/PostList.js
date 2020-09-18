@@ -2,16 +2,34 @@ import React from "react";
 import hdate from "human-date";
 import { Feed, Icon, Dimmer, Loader } from "semantic-ui-react";
 import { Link, useParams } from "react-router-dom";
-import { GET_POSTS_QUERY } from "../../graphql/Post";
+import { GET_POSTS_QUERY, NEW_POST_SUBSCRIPTION } from "../../graphql/Post";
 import { useQuery } from "@apollo/client";
 import PlainSegment from "../PlainSegment";
+
 const PostList = () => {
 	const { groupId } = useParams();
-	const { loading, data } = useQuery(GET_POSTS_QUERY, {
+	const { subscribeToMore, loading, data } = useQuery(GET_POSTS_QUERY, {
 		variables: {
 			groupId: parseInt(groupId),
 		},
 	});
+
+	React.useEffect(() => {
+		const unsubscribe = subscribeToMore({
+			document: NEW_POST_SUBSCRIPTION,
+			variables: { groupId: parseInt(groupId) },
+			updateQuery: (prev, { subscriptionData }) => {
+				if (!subscriptionData.data) return prev;
+				const newPost = subscriptionData.data.postAdded;
+				return {
+					getPosts: [newPost, ...prev.getPosts],
+				};
+			},
+		});
+		return () => unsubscribe();
+		//eslint-disable-next-line
+	}, [groupId]);
+
 	if (loading)
 		return (
 			<Dimmer inverted active>
