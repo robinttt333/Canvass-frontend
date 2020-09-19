@@ -19,6 +19,7 @@ export const NEW_COMMENT_SUBSCRIPTION = gql`
 			content
 			createdAt
 			author {
+				id
 				username
 				profile {
 					dp
@@ -35,6 +36,7 @@ export const GET_COMMENTS_QUERY = gql`
 			content
 			createdAt
 			author {
+				id
 				username
 				profile {
 					dp

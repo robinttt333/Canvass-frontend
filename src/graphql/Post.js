@@ -29,6 +29,7 @@ export const GET_POSTS_QUERY = gql`
 			likes
 			liked
 			author {
+				id
 				username
 				profile {
 					dp
@@ -47,6 +48,7 @@ export const NEW_POST_SUBSCRIPTION = gql`
 			likes
 			liked
 			author {
+				id
 				username
 				profile {
 					dp

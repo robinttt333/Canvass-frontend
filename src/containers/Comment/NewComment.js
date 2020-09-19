@@ -4,11 +4,16 @@ import { useFormik } from "formik";
 import { useMutation } from "@apollo/client";
 import { CREATE_COMMENT_MUTATION } from "../../graphql/Comment";
 
-const NewComment = ({ postId }) => {
+const NewComment = ({ postId, initialContent, setInitialContent }) => {
 	const [createComment] = useMutation(CREATE_COMMENT_MUTATION);
+	console.log(initialContent);
 	const formik = useFormik({
+		// reinitialize form whenever initialValues change
+		// This is desirable when a user clicks reply on a comment
+		// we need to set the initialValues to the user name
+		enableReinitialize: true,
 		initialValues: {
-			content: "",
+			content: initialContent,
 		},
 		validate: (values) => {
 			const errors = {};
@@ -28,6 +33,7 @@ const NewComment = ({ postId }) => {
 				},
 			});
 			if (ok) {
+				setInitialContent("");
 				formik.resetForm();
 				return;
 			}

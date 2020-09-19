@@ -5,6 +5,7 @@ import Comment from "../../components/Comment/Comment";
 import { NEW_COMMENT_SUBSCRIPTION } from "../../graphql/Comment";
 
 const CommentList = ({ postId, subscribeToMore, comments }) => {
+	const [initialContent, setInitialContent] = React.useState("");
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
 			document: NEW_COMMENT_SUBSCRIPTION,
@@ -28,10 +29,18 @@ const CommentList = ({ postId, subscribeToMore, comments }) => {
 		<Accordion.Content active>
 			<SemanticComment.Group size="small">
 				{comments.map((comment) => (
-					<Comment comment={comment} key={comment.id} />
+					<Comment
+						comment={comment}
+						key={comment.id}
+						setInitialContent={setInitialContent}
+					/>
 				))}
 			</SemanticComment.Group>
-			<NewComment postId={postId} />
+			<NewComment
+				postId={postId}
+				initialContent={initialContent}
+				setInitialContent={setInitialContent}
+			/>
 		</Accordion.Content>
 	);
 };

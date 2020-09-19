@@ -2,16 +2,29 @@ import React from "react";
 import { Menu } from "semantic-ui-react";
 import { logoutUser } from "../util";
 import { useHistory } from "react-router-dom";
+import { getUserfromCookie } from "../util";
 
 const Navbar = () => {
-	const [state, setState] = React.useState({});
-	const handleItemClick = (e, { name }) => setState({ activeItem: name });
-	const history = useHistory();
 	const handleLogout = async (e) => {
 		const res = logoutUser();
 		if (res) return history.push("/login");
 	};
-	const { activeItem } = state;
+	const handleItemClick = (_, { name }) => {
+		setState({ activeItem: name });
+		switch (name) {
+			case "profile":
+				history.push(`/profile/${getUserfromCookie().userId}`);
+				break;
+			case "group":
+				history.push("/group/1");
+				break;
+		}
+	};
+	//select active item from url
+	const history = useHistory();
+	const location = history.location.pathname.split("/")[1];
+	const [state, setState] = React.useState(location);
+	const activeItem = state;
 
 	return (
 		<Menu
@@ -21,19 +34,19 @@ const Navbar = () => {
 			style={{ borderRadius: "0px", height: "50px" }}
 		>
 			<Menu.Item
-				name="editorials"
-				active={activeItem === "editorials"}
+				name="profile"
+				active={activeItem === "profile"}
 				onClick={handleItemClick}
 			>
-				Editorials
+				My Profile
 			</Menu.Item>
 
 			<Menu.Item
-				name="reviews"
-				active={activeItem === "reviews"}
+				name="group"
+				active={activeItem === "group"}
 				onClick={handleItemClick}
 			>
-				Reviews
+				My Groups
 			</Menu.Item>
 
 			<Menu.Item
