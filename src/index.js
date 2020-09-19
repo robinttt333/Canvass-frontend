@@ -10,6 +10,7 @@ import { ApolloProvider } from "@apollo/client";
 import Profile from "./routes/Profile";
 import PrivateRoute from "./routes/PrivateRoute";
 import Group from "./routes/Group";
+import Chat from "./routes/Chat";
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
@@ -18,6 +19,7 @@ ReactDOM.render(
 			<Route path="/login" exact component={Login} />
 			<PrivateRoute path="/profile/:userId" exact component={Profile} />
 			<PrivateRoute path="/group/:groupId" exact component={Group} />
+			<PrivateRoute path="/chat/:userId" exact component={Chat} />
 		</Router>
 	</ApolloProvider>,
 	document.getElementById("root")

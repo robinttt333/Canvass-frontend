@@ -25,17 +25,22 @@ const GroupDescription = ({
 									<Card.Header>#{name}</Card.Header>
 									<Card.Meta>
 										<span className="date">
-											Created {hdate.relativeTime(createdAt)} by{" "}
-											{admin ? <Link to="/profile/1">admin</Link> : "admin"}
+											Created <b>{hdate.relativeTime(createdAt)}</b> by{" "}
+											<b>
+												{admin ? <Link to="/profile/1">admin</Link> : "admin"}
+											</b>
 										</span>
 									</Card.Meta>
 								</Card.Content>
 								<Card.Content extra>
-									<Icon name="user" />
+									<Icon name="user" color="black" />
 									{members} {members === 1 ? "member" : "members"}
 									<br />
-									<Icon name={visible ? "check" : "close"} />
-									Status: {visible ? "Public" : "Private"}
+									<Icon
+										name={visible ? "check" : "close"}
+										color={visible ? "green" : "red"}
+									/>
+									Status: <b>{visible ? "Public" : "Private"}</b>
 								</Card.Content>
 							</Card>
 						</Grid.Column>

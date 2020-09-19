@@ -1,15 +1,10 @@
 import { gql } from "@apollo/client";
 
-const GET_GROUP_QUERY = gql`
+export const GET_GROUP_QUERY = gql`
 	query($groupId: Int!) {
 		getGroup(groupId: $groupId) {
 			name
-			members {
-				username
-				profile {
-					dp
-				}
-			}
+			members
 			description
 			image
 			admin
@@ -18,4 +13,3 @@ const GET_GROUP_QUERY = gql`
 		}
 	}
 `;
-export default GET_GROUP_QUERY;

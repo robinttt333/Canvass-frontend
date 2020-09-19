@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion } from "semantic-ui-react";
+import { Dimmer, Loader, Accordion } from "semantic-ui-react";
 import CommentTitle from "./CommentTitle";
 import { useQuery } from "@apollo/client";
 import { GET_COMMENTS_QUERY } from "../../graphql/Comment";
@@ -14,7 +14,12 @@ const CommentListWrapper = ({ postId }) => {
 		variables: { postId },
 	});
 
-	if (loading) return null;
+	if (loading)
+		return (
+			<Dimmer inverted active>
+				<Loader>Loading</Loader>
+			</Dimmer>
+		);
 	const comments = data.getComments;
 	return (
 		<Accordion style={{ display: "inline" }}>

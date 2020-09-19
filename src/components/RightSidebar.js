@@ -9,10 +9,10 @@ const RightSidebarWrapper = styled.div`
 	right: 0;
 `;
 
-const RightSidebar = ({ members }) => {
+const RightSidebar = ({ groupId }) => {
 	return (
 		<RightSidebarWrapper>
-			<GroupMembersList members={members} />
+			<GroupMembersList groupId={groupId} />
 		</RightSidebarWrapper>
 	);
 };

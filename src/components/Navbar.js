@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
 import { logoutUser } from "../util";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getUserfromCookie } from "../util";
 
 const Navbar = () => {
@@ -9,6 +9,8 @@ const Navbar = () => {
 		const res = logoutUser();
 		if (res) return history.push("/login");
 	};
+
+	const param = useParams();
 	const handleItemClick = (_, { name }) => {
 		setState({ activeItem: name });
 		switch (name) {
@@ -17,6 +19,9 @@ const Navbar = () => {
 				break;
 			case "group":
 				history.push("/group/1");
+				break;
+			case "chat":
+				history.push(`/chat/${param.userId}`);
 				break;
 		}
 	};
@@ -50,11 +55,11 @@ const Navbar = () => {
 			</Menu.Item>
 
 			<Menu.Item
-				name="upcomingEvents"
-				active={activeItem === "upcomingEvents"}
+				name="chat"
+				active={activeItem === "chat"}
 				onClick={handleItemClick}
 			>
-				Upcoming Events
+				Chats
 			</Menu.Item>
 			<Menu.Item
 				position="right"
