@@ -75,16 +75,6 @@ const PostComments = ({ postId }) => {
 							</Comment.Actions>
 						</Comment.Content>
 					</Comment>
-
-					<Form reply>
-						<Form.TextArea />
-						<Button
-							content="Add Reply"
-							labelPosition="left"
-							icon="edit"
-							primary
-						/>
-					</Form>
 				</Comment.Group>
 			</Accordion.Content>
 		</Accordion>

@@ -1,10 +1,10 @@
 import React from "react";
 import { Feed, Dimmer, Loader } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
-import { GET_POSTS_QUERY, NEW_POST_SUBSCRIPTION } from "../../../graphql/Post";
-import PostItem from "../PostItem";
+import { GET_POSTS_QUERY, NEW_POST_SUBSCRIPTION } from "../../graphql/Post";
+import PostItem from "./PostItem";
 import { useQuery } from "@apollo/client";
-import PlainSegment from "../../PlainSegment";
+import PlainSegment from "../../components/PlainSegment";
 
 const PostList = () => {
 	const { groupId } = useParams();

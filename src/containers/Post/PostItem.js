@@ -4,7 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import hdate from "human-date";
 import { GET_POSTS_QUERY, TOGGLE_LIKE_MUTATION } from "../../graphql/Post";
 import { useMutation } from "@apollo/client";
-import PostComments from "./containers/PostComments";
+import CommentList from "./CommentList";
+
 const PostItem = ({
 	post: {
 		author: {
@@ -71,11 +72,14 @@ const PostItem = ({
 						onClick={() => handleLiked(id)}
 						style={{ fontSize: ".75em" }}
 					>
-						<Icon name={liked ? "thumbs up" : "thumbs up outline"} />
+						<Icon
+							color="blue"
+							name={liked ? "thumbs up" : "thumbs up outline"}
+						/>
 						{likes} Likes
 					</Feed.Like>
 
-					<PostComments postId={id} />
+					<CommentList postId={id} />
 				</Feed.Meta>
 			</Feed.Content>
 		</Feed.Event>

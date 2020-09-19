@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Header, Button } from "semantic-ui-react";
-import PlainSegment from "../PlainSegment";
+import PlainSegment from "../../components/PlainSegment";
 import { useFormik } from "formik";
 import { CREATE_POST_MUTATION } from "../../graphql/Post";
 import { useMutation } from "@apollo/client";
@@ -19,7 +19,7 @@ const NewPost = () => {
 				errors.content = "Content cannot be empty";
 			return errors;
 		},
-		onSubmit: async (e) => {
+		onSubmit: async (_) => {
 			const {
 				data: {
 					createPost: { error, ok },

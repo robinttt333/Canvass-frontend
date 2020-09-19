@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 import GroupDescription from "./GroupDescription";
-import NewPost from "../Post/NewPost";
-import PostList from "../Post/containers/PostList";
+import NewPost from "../../containers/Post/NewPost";
+import PostList from "../../containers/Post/PostList";
 
 const GroupWrapper = styled.div`
 	grid-column-start: 2;
