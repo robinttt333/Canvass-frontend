@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import hdate from "human-date";
 import { GET_POSTS_QUERY, TOGGLE_LIKE_MUTATION } from "../../graphql/Post";
 import { useMutation } from "@apollo/client";
-import CommentList from "./CommentList";
+import CommentListWrapper from "../Comment/CommentListWrapper";
 
 const PostItem = ({
 	post: {
@@ -78,8 +78,7 @@ const PostItem = ({
 						/>
 						{likes} Likes
 					</Feed.Like>
-
-					<CommentList postId={id} />
+					<CommentListWrapper postId={id} />
 				</Feed.Meta>
 			</Feed.Content>
 		</Feed.Event>

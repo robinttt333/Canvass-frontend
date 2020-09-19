@@ -8,19 +8,6 @@ export const CREATE_POST_MUTATION = gql`
 				path
 				message
 			}
-			post {
-				content
-				createdAt
-				id
-				likes
-				liked
-				author {
-					username
-					profile {
-						dp
-					}
-				}
-			}
 		}
 	}
 `;
