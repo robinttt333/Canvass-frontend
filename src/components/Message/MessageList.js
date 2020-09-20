@@ -13,6 +13,12 @@ const MessageListWrapper = styled.div`
 `;
 const MessageList = ({ messages }) => {
 	const me = getUserfromCookie();
+	//This part is used to scroll to the bottom of the
+	//page automatically once a new message is added
+	const bottom = React.useRef();
+	React.useEffect(() => {
+		bottom.current.scrollIntoView({ behaviour: "smooth" });
+	}, [messages]);
 	return (
 		<MessageListWrapper>
 			<Comment.Group style={{ maxWidth: "100%" }}>
@@ -53,6 +59,7 @@ const MessageList = ({ messages }) => {
 					)
 				)}
 			</Comment.Group>
+			<div ref={bottom} />
 		</MessageListWrapper>
 	);
 };

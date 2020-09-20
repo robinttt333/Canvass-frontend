@@ -5,6 +5,7 @@ import { Icon, Comment as SemanticComment } from "semantic-ui-react";
 
 const Comment = ({
 	setInitialContent,
+	focusInputCallback,
 	comment: {
 		content,
 		createdAt,
@@ -30,7 +31,10 @@ const Comment = ({
 					name="reply"
 					style={{ marginLeft: "10px", color: "gray" }}
 					link
-					onClick={() => setInitialContent(`@${username}`)}
+					onClick={() => {
+						focusInputCallback();
+						setInitialContent(`@${username} `);
+					}}
 				/>
 			</SemanticComment.Text>
 		</SemanticComment.Content>

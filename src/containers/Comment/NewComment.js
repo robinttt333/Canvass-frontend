@@ -1,12 +1,16 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Ref, Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import { useMutation } from "@apollo/client";
 import { CREATE_COMMENT_MUTATION } from "../../graphql/Comment";
 
-const NewComment = ({ postId, initialContent, setInitialContent }) => {
+const NewComment = ({
+	postId,
+	initialContent,
+	setInitialContent,
+	inputRef,
+}) => {
 	const [createComment] = useMutation(CREATE_COMMENT_MUTATION);
-	console.log(initialContent);
 	const formik = useFormik({
 		// reinitialize form whenever initialValues change
 		// This is desirable when a user clicks reply on a comment
@@ -45,12 +49,14 @@ const NewComment = ({ postId, initialContent, setInitialContent }) => {
 
 	return (
 		<Form reply onSubmit={formik.handleSubmit}>
-			<Form.TextArea
-				onChange={formik.handleChange}
-				value={formik.values.content}
-				error={formik.errors.content}
-				name="content"
-			/>
+			<Ref innerRef={inputRef}>
+				<Form.TextArea
+					onChange={formik.handleChange}
+					value={formik.values.content}
+					error={formik.errors.content}
+					name="content"
+				/>
+			</Ref>
 			<Button
 				size="mini"
 				content="Comment"

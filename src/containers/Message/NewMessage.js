@@ -51,7 +51,6 @@ const NewMessage = ({ receiver }) => {
 							name="content"
 							onChange={formik.handleChange}
 							value={formik.values.content}
-							onChange={formik.handleChange}
 						/>
 					</Form.Field>
 					<Button primary onClick={formik.handleSubmit}>

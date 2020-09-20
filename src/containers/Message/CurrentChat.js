@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { GET_CHAT } from "../../graphql/Message";
 import MessageList from "../../components/Message/MessageList";
 import NewMessage from "./NewMessage";
-import { getUserfromCookie } from "../../util";
 import { NEW_MESSAGE_SUBSCRIPTION } from "../../graphql/Message";
 
 const CurrentChat = ({ userId }) => {
@@ -12,7 +11,6 @@ const CurrentChat = ({ userId }) => {
 			userId,
 		},
 	});
-	const me = getUserfromCookie();
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
 			document: NEW_MESSAGE_SUBSCRIPTION,

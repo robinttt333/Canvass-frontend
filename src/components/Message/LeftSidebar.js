@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
-import { Menu, List, Image, Dimmer, Loader } from "semantic-ui-react";
+import { Menu, Image, Dimmer, Loader } from "semantic-ui-react";
 import React from "react";
 import { GET_CHAT_MEMBERS } from "../../graphql/Message";
 import { Link } from "react-router-dom";

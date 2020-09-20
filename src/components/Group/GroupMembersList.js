@@ -7,7 +7,6 @@ import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 
 const GroupMembersList = ({ groupId }) => {
-	console.log(groupId);
 	const { loading, data } = useQuery(GET_GROUP_MEMBERS, {
 		variables: { groupId },
 	});
