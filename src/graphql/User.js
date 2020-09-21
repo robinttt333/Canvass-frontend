@@ -23,3 +23,16 @@ export const LOGIN = gql`
 		}
 	}
 `;
+
+export const TOGGLE_USER_JOINED_SUBSCRIPTION = gql`
+	subscription {
+		toggleUserJoined {
+			id
+			username
+			profile {
+				dp
+				lastSeen
+			}
+		}
+	}
+`;

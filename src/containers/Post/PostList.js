@@ -20,10 +20,6 @@ const PostList = () => {
 			updateQuery: (prev, { subscriptionData }) => {
 				if (!subscriptionData.data) return prev;
 				const newPost = subscriptionData.data.postAdded;
-				// hdate breaks with new post date so we change time to 1 sec before actual value
-				let date = new Date();
-				date.setSeconds(date.getSeconds() - 1);
-				newPost.createdAt = date;
 				return {
 					getPosts: [newPost, ...prev.getPosts],
 				};
@@ -39,7 +35,9 @@ const PostList = () => {
 				<Loader>Loading</Loader>
 			</Dimmer>
 		);
+
 	const posts = data.getPosts;
+
 	return (
 		<PlainSegment>
 			<Feed size="large">

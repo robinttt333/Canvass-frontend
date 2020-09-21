@@ -7,6 +7,7 @@ export const GET_CHAT_MEMBERS = gql`
 			username
 			profile {
 				dp
+				lastSeen
 			}
 		}
 	}

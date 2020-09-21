@@ -19,9 +19,6 @@ const CommentList = ({ postId, subscribeToMore, comments }) => {
 			updateQuery: (prev, { subscriptionData }) => {
 				if (!subscriptionData.data) return prev;
 				const newComment = subscriptionData.data.commentAdded;
-				let date = new Date();
-				date.setSeconds(date.getSeconds() - 1);
-				newComment.createdAt = date;
 				return {
 					getComments: [newComment, ...prev.getComments],
 				};

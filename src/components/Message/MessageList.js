@@ -7,7 +7,8 @@ import styled from "styled-components";
 const MessageListWrapper = styled.div`
 	grid-column: 2 / span 1;
 	grid-row: 1 / span 1;
-	margin: 0 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 	margin-right: 0;
 	overflow: auto;
 `;

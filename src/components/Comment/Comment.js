@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import hdate from "human-date";
 import React from "react";
 import { Icon, Comment as SemanticComment } from "semantic-ui-react";
+import { getRelativeTime } from "../../util";
 
 const Comment = ({
 	setInitialContent,
@@ -23,7 +23,7 @@ const Comment = ({
 				<Link to={`/profile/${id}`}>{username}</Link>
 			</SemanticComment.Author>
 			<SemanticComment.Metadata>
-				<div> {hdate.relativeTime(createdAt)} </div>
+				<div> {getRelativeTime(createdAt)} </div>
 			</SemanticComment.Metadata>
 			<SemanticComment.Text>
 				{content}

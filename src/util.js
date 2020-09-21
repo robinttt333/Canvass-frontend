@@ -1,6 +1,9 @@
+import React from "react";
+import hdate from "human-date";
 import { decode } from "jsonwebtoken";
 import Cookies from "js-cookie";
-
+import { useSubscription } from "@apollo/client";
+import { TOGGLE_USER_JOINED_SUBSCRIPTION } from "./graphql/User";
 export const resetCookies = () => {
 	try {
 		Cookies.remove("access-token", { path: "/" });
@@ -31,6 +34,17 @@ export const getUserfromCookie = () => {
 	return user;
 };
 
+const Logout = () => {
+	useSubscription(TOGGLE_USER_JOINED_SUBSCRIPTION);
+	return null;
+};
 export const logoutUser = async () => {
-	return resetCookies();
+	resetCookies();
+	return <Logout />;
+};
+
+export const getRelativeTime = (time) => {
+	const t = hdate.relativeTime(time);
+	if (t === " ago") return "just now";
+	return t;
 };

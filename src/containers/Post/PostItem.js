@@ -1,10 +1,10 @@
 import React from "react";
 import { Icon, Feed } from "semantic-ui-react";
 import { Link, useParams } from "react-router-dom";
-import hdate from "human-date";
 import { GET_POSTS_QUERY, TOGGLE_LIKE_MUTATION } from "../../graphql/Post";
 import { useMutation } from "@apollo/client";
 import CommentListWrapper from "../Comment/CommentListWrapper";
+import { getRelativeTime } from "../../util";
 
 const PostItem = ({
 	post: {
@@ -60,7 +60,7 @@ const PostItem = ({
 				<Feed.Summary>
 					<Link to={`/profile/${userId}`}> {username} </Link>
 					<Feed.Date style={{ fontSize: ".75em" }}>
-						{hdate.relativeTime(createdAt)}
+						{getRelativeTime(createdAt)}
 					</Feed.Date>
 				</Feed.Summary>
 				{/* add this to treak style line breaks properly*/}
