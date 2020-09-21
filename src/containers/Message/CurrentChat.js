@@ -11,6 +11,7 @@ const CurrentChat = ({ user: { id: userId, username } }) => {
 		variables: {
 			userId,
 		},
+		fetchPolicy: "network-only",
 	});
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({

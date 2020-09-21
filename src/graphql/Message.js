@@ -57,3 +57,16 @@ export const NEW_MESSAGE_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const NEW_CHAT_MEMBER_SUBSCRIPTION = gql`
+	subscription {
+		chatMemberAdded {
+			username
+			id
+			profile {
+				dp
+				lastSeen
+			}
+		}
+	}
+`;

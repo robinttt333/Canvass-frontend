@@ -2,7 +2,10 @@ import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { Menu, Image, Dimmer, Loader } from "semantic-ui-react";
 import React from "react";
-import { GET_CHAT_MEMBERS } from "../../graphql/Message";
+import {
+	GET_CHAT_MEMBERS,
+	NEW_CHAT_MEMBER_SUBSCRIPTION,
+} from "../../graphql/Message";
 import { Link } from "react-router-dom";
 import { TOGGLE_USER_JOINED_SUBSCRIPTION } from "../../graphql/User";
 import { getRelativeTime } from "../../util";
@@ -31,6 +34,7 @@ const LastSeen = ({ lastSeen }) => {
 const LeftSidebar = ({ user }) => {
 	const { subscribeToMore, loading, data } = useQuery(GET_CHAT_MEMBERS);
 	const userId = user.id;
+	// change last seen of user accordingly
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
 			document: TOGGLE_USER_JOINED_SUBSCRIPTION,
@@ -49,6 +53,23 @@ const LeftSidebar = ({ user }) => {
 		return () => unsubscribe();
 		//eslint-disable-next-line
 	}, []);
+	// update chat member list when a new person messages us
+	React.useEffect(() => {
+		const unsubscribe = subscribeToMore({
+			document: NEW_CHAT_MEMBER_SUBSCRIPTION,
+			updateQuery: (prev, { subscriptionData }) => {
+				if (!subscriptionData.data) return prev;
+				return {
+					getChatMembers: [
+						...prev.getChatMembers,
+						subscriptionData.data.chatMemberAdded,
+					],
+				};
+			},
+		});
+		return () => unsubscribe();
+		//eslint-disable-next-line
+	}, []);
 
 	if (loading)
 		return (
@@ -56,11 +77,13 @@ const LeftSidebar = ({ user }) => {
 				<Loader>Loading</Loader>
 			</Dimmer>
 		);
+
 	let chatMembers = data.getChatMembers;
-	const chatMembersWithoutCurrentUser = chatMembers.filter(
-		({ id }) => id !== userId
-	);
-	chatMembers = [user, ...chatMembersWithoutCurrentUser];
+	let found = false;
+	chatMembers.forEach(({ id }) => {
+		if (!found) found = id === user.id;
+	});
+	if (!found) chatMembers = [user, ...chatMembers];
 	const activeItem = userId;
 	return (
 		<LeftSidebarWrapper>
