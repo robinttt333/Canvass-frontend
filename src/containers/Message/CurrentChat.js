@@ -1,11 +1,12 @@
 import React from "react";
+import { Header } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import { GET_CHAT } from "../../graphql/Message";
 import MessageList from "../../components/Message/MessageList";
 import NewMessage from "./NewMessage";
 import { NEW_MESSAGE_SUBSCRIPTION } from "../../graphql/Message";
 
-const CurrentChat = ({ userId }) => {
+const CurrentChat = ({ user: { id: userId, username } }) => {
 	const { subscribeToMore, loading, data } = useQuery(GET_CHAT, {
 		variables: {
 			userId,
@@ -30,7 +31,12 @@ const CurrentChat = ({ userId }) => {
 	const messages = data.getChat;
 	return (
 		<React.Fragment>
-			<MessageList userId={userId} messages={messages} />
+			{messages.length && <MessageList userId={userId} messages={messages} />}
+			{messages.length === 0 && (
+				<Header style={{ textAlign: "center" }}>
+					Start a conversation with {username}
+				</Header>
+			)}
 			<NewMessage receiver={userId} />
 		</React.Fragment>
 	);

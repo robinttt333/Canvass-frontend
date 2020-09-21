@@ -36,3 +36,16 @@ export const TOGGLE_USER_JOINED_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const GET_USER = gql`
+	query($userId: Int!) {
+		getUser(userId: $userId) {
+			username
+			id
+			profile {
+				dp
+				lastSeen
+			}
+		}
+	}
+`;

@@ -6,13 +6,11 @@ import { NEW_COMMENT_SUBSCRIPTION } from "../../graphql/Comment";
 
 const CommentList = ({ postId, subscribeToMore, comments }) => {
 	const [initialContent, setInitialContent] = React.useState("");
-	const bottom = React.useRef();
 	//These are used to autofocus to texArea when user clicks on reply
 	const inputRef = React.useRef();
 	const focusInputCallback = () => inputRef.current.children[0].focus();
 
 	React.useEffect(() => {
-		bottom.current.scrollIntoView({ behaviour: "smooth" });
 		const unsubscribe = subscribeToMore({
 			document: NEW_COMMENT_SUBSCRIPTION,
 			variables: { postId },
@@ -40,8 +38,6 @@ const CommentList = ({ postId, subscribeToMore, comments }) => {
 						focusInputCallback={focusInputCallback}
 					/>
 				))}
-
-				<div ref={bottom} />
 			</SemanticComment.Group>
 			<NewComment
 				postId={postId}

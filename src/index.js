@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import Register from "./routes/Register";
 import Login from "./routes/Login";
@@ -15,11 +15,13 @@ import Chat from "./routes/Chat";
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<Router>
-			<Route path="/register" exact component={Register} />
-			<Route path="/login" exact component={Login} />
-			<PrivateRoute path="/profile/:userId" exact component={Profile} />
-			<PrivateRoute path="/group/:groupId" exact component={Group} />
-			<PrivateRoute path="/chat/:userId" exact component={Chat} />
+			<Switch>
+				<Route path="/register" component={Register} />
+				<Route path="/login" component={Login} />
+				<PrivateRoute path="/profile/:userId" component={Profile} />
+				<PrivateRoute path="/group/:groupId" component={Group} />
+				<PrivateRoute path="/chat/:userId" component={Chat} />
+			</Switch>
 		</Router>
 	</ApolloProvider>,
 	document.getElementById("root")

@@ -4,6 +4,7 @@ import { decode } from "jsonwebtoken";
 import Cookies from "js-cookie";
 import { useSubscription } from "@apollo/client";
 import { TOGGLE_USER_JOINED_SUBSCRIPTION } from "./graphql/User";
+
 export const resetCookies = () => {
 	try {
 		Cookies.remove("access-token", { path: "/" });
@@ -30,7 +31,9 @@ export const getUserfromCookie = () => {
 	let user = null;
 	try {
 		user = decode(accessToken);
-	} catch (err) {}
+	} catch (err) {
+		console.log(err);
+	}
 	return user;
 };
 

@@ -20,12 +20,17 @@ const LastSeen = ({ lastSeen }) => {
 	if (lastSeen === "active now") return lastSeen;
 	let time = getRelativeTime(lastSeen);
 	if (time === "just now") time = "1 second ago";
-	return <i>{time}</i>;
+	return (
+		<i>
+			last seen {"  "}
+			{time}
+		</i>
+	);
 };
 
-const LeftSidebar = ({ userId }) => {
+const LeftSidebar = ({ user }) => {
 	const { subscribeToMore, loading, data } = useQuery(GET_CHAT_MEMBERS);
-
+	const userId = user.id;
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
 			document: TOGGLE_USER_JOINED_SUBSCRIPTION,
@@ -51,8 +56,11 @@ const LeftSidebar = ({ userId }) => {
 				<Loader>Loading</Loader>
 			</Dimmer>
 		);
-	const chatMembers = data.getChatMembers;
-
+	let chatMembers = data.getChatMembers;
+	const chatMembersWithoutCurrentUser = chatMembers.filter(
+		({ id }) => id !== userId
+	);
+	chatMembers = [user, ...chatMembersWithoutCurrentUser];
 	const activeItem = userId;
 	return (
 		<LeftSidebarWrapper>

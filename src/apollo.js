@@ -20,7 +20,6 @@ const httpLink = createHttpLink({
 	uri: "http://127.0.0.1:4000/graphql",
 	credentials: "include",
 });
-
 const splitLink = split(
 	({ query }) => {
 		const definition = getMainDefinition(query);

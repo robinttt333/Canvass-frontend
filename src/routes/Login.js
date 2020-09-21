@@ -6,10 +6,9 @@ import LoginSchema from "../formValidations/Login";
 import { LOGIN } from "../graphql/User";
 import { useMutation } from "@apollo/client";
 
-const Login = () => {
+const Login = ({ history }) => {
 	const [login] = useMutation(LOGIN);
 	const [resErr, setResErr] = React.useState(null);
-	const history = useHistory();
 	const formik = useFormik({
 		initialValues: {
 			usernameOrEmail: "",
