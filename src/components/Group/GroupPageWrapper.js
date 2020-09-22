@@ -5,5 +5,6 @@ const GroupPageWrapper = styled.div`
 	height: 100%;
 	width: 100%;
 	grid-template-columns: 25% 50% 25%;
+	scroll: auto;
 `;
 export default GroupPageWrapper;

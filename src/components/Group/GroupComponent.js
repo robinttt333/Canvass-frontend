@@ -7,7 +7,7 @@ import PostList from "../../containers/Post/PostList";
 const GroupWrapper = styled.div`
 	grid-column-start: 2;
 	height: 100%;
-	background: white;
+	background: #e6f1f5;
 `;
 
 const Group = ({

@@ -34,7 +34,6 @@ const genderOptions = [
 const ProfileWrapper = styled.div`
 	grid-column: 2 / span 1;
 	grid-row: 1 / span 1;
-	overflow: hidden;
 `;
 
 const Profile = ({

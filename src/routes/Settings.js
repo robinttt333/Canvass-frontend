@@ -18,6 +18,7 @@ const Settings = () => {
 	const { userId } = useParams();
 	const { loading, data } = useQuery(GET_USER, {
 		variables: { userId: parseInt(userId) },
+		fetchPolicy: "network-only",
 	});
 	if (loading) return null;
 	const { username, profile } = data.getUser;

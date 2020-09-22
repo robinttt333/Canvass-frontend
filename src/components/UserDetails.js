@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Header, Icon, Segment } from "semantic-ui-react";
 import hdate from "human-date";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default ({ firstName, lastName, dob, gender, userId }) => {
 	const history = useHistory();
@@ -46,7 +46,9 @@ export default ({ firstName, lastName, dob, gender, userId }) => {
 								link
 								onClick={() => history.push(`/settings/${userId}`)}
 							/>
-							<Header.Content>Manage Profile</Header.Content>
+							<Header.Content>
+								<Link to={`/settings/${userId}`}>Manage Profile</Link>
+							</Header.Content>
 						</Header>
 					</Grid.Column>
 				</Grid.Row>
