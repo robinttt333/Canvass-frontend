@@ -14,6 +14,7 @@ const Profile = () => {
 	const { userId } = useParams();
 	const { loading, data } = useQuery(GET_PROFILE_QUERY, {
 		variables: { userId: parseInt(userId) },
+		fetchPolicy: "network-only",
 	});
 	if (loading) return null;
 	const profile = data.getProfile;
@@ -29,9 +30,10 @@ const Profile = () => {
 						createdAt={profile.createdAt}
 					/>
 					<UserDetails
+						userId={userId}
 						firstName={profile.firstName}
 						lastName={profile.lastName}
-						sex={profile.sex}
+						gender={profile.gender}
 						dob={profile.dob}
 					/>
 				</Grid>

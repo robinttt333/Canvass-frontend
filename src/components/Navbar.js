@@ -20,6 +20,9 @@ const Navbar = () => {
 			case "group":
 				history.push("/group/1");
 				break;
+			case "settings":
+				history.push(`/settings/${param.userId}`);
+				break;
 			case "chat":
 				history.push(`/chat/${param.userId}`);
 				break;
@@ -52,6 +55,13 @@ const Navbar = () => {
 				onClick={handleItemClick}
 			>
 				My Groups
+			</Menu.Item>
+			<Menu.Item
+				name="settings"
+				active={activeItem === "settings"}
+				onClick={handleItemClick}
+			>
+				Settings
 			</Menu.Item>
 
 			<Menu.Item

@@ -44,7 +44,12 @@ export const GET_USER = gql`
 			id
 			profile {
 				dp
+				dob
 				lastSeen
+				firstName
+				lastName
+				status
+				gender
 			}
 		}
 	}

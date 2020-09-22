@@ -11,7 +11,8 @@ import Profile from "./routes/Profile";
 import PrivateRoute from "./routes/PrivateRoute";
 import Group from "./routes/Group";
 import Chat from "./routes/Chat";
-
+import Settings from "./routes/Settings";
+// Switch added to redirect from login page
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<Router>
@@ -19,6 +20,7 @@ ReactDOM.render(
 				<Route path="/register" component={Register} />
 				<Route path="/login" component={Login} />
 				<PrivateRoute path="/profile/:userId" component={Profile} />
+				<PrivateRoute path="/settings/:userId" component={Settings} />
 				<PrivateRoute path="/group/:groupId" component={Group} />
 				<PrivateRoute path="/chat/:userId" component={Chat} />
 			</Switch>

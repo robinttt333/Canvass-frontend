@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Message, Container, Button, Form, Header } from "semantic-ui-react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginSchema from "../formValidations/Login";
 import { LOGIN } from "../graphql/User";
 import { useMutation } from "@apollo/client";

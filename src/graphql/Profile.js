@@ -9,11 +9,37 @@ export const GET_PROFILE_QUERY = gql`
 			status
 			dob
 			dp
-			sex
+			gender
 			createdAt
 			user {
 				username
 				email
+			}
+		}
+	}
+`;
+
+export const UPDATE_PROFILE = gql`
+	mutation(
+		$userId: Int!
+		$firstName: String!
+		$lastName: String!
+		$status: String!
+		$dob: String!
+		$gender: Boolean!
+	) {
+		updateProfile(
+			userId: $userId
+			firstName: $firstName
+			lastName: $lastName
+			status: $status
+			dob: $dob
+			gender: $gender
+		) {
+			ok
+			error {
+				message
+				path
 			}
 		}
 	}
