@@ -44,3 +44,14 @@ export const UPDATE_PROFILE = gql`
 		}
 	}
 `;
+export const UPDATE_IMAGE = gql`
+	mutation($file: Upload!) {
+		updateImage(file: $file) {
+			ok
+			error {
+				path
+				message
+			}
+		}
+	}
+`;

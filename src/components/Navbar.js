@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { getUserfromCookie } from "../util";
 
 const Navbar = () => {
-	const param = useParams();
 	const handleItemClick = (_, { name }) => {
 		setState({ activeItem: name });
 		switch (name) {
@@ -15,10 +14,10 @@ const Navbar = () => {
 				history.push("/group/1");
 				break;
 			case "settings":
-				history.push(`/settings/${param.userId}`);
+				history.push(`/settings/${getUserfromCookie().userId}`);
 				break;
 			case "chat":
-				history.push(`/chat/${param.userId}`);
+				history.push(`/chat/${getUserfromCookie().userId}`);
 				break;
 			case "logout":
 				history.push("/logout");

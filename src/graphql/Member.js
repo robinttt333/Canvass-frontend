@@ -14,3 +14,18 @@ export const GET_GROUP_MEMBERS = gql`
 		}
 	}
 `;
+
+export const NEW_GROUP_MEMBER_SUBSCRIPTION = gql`
+	subscription OnGroupMemberAdded($groupId: Int!) {
+		groupMemberAdded(groupId: $groupId) {
+			user {
+				id
+				username
+				profile {
+					dp
+				}
+			}
+			memberSince
+		}
+	}
+`;

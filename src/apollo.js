@@ -1,9 +1,5 @@
-import {
-	ApolloClient,
-	InMemoryCache,
-	split,
-	createHttpLink,
-} from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
+import { ApolloClient, InMemoryCache, split } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getCookies } from "./util";
@@ -17,7 +13,7 @@ export const wsLink = new WebSocketLink({
 		connectionParams: () => getCookies(),
 	},
 });
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
 	uri: "http://127.0.0.1:4000/graphql",
 	credentials: "include",
 });

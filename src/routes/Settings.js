@@ -23,7 +23,7 @@ const Settings = () => {
 	const { username, profile } = data.getUser;
 	return (
 		<ProfileSettingsWrapper>
-			<ProfileImage dp={profile.dp} />
+			<ProfileImage userId={parseInt(userId)} dp={profile.dp} />
 			<Profile
 				userId={parseInt(userId)}
 				username={username}
