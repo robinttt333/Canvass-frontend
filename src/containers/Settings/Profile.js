@@ -34,6 +34,7 @@ const genderOptions = [
 const ProfileWrapper = styled.div`
 	grid-column: 2 / span 1;
 	grid-row: 1 / span 1;
+	overflow: hidden;
 `;
 
 const Profile = ({
@@ -118,7 +119,7 @@ const Profile = ({
 				</Form.Group>
 				<Form.Group>
 					<Form.Field
-						width={10}
+						width={8}
 						id="form-textarea-control-opinion"
 						control={TextArea}
 						label="Status"

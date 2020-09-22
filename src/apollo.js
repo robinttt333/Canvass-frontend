@@ -8,14 +8,15 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getCookies } from "./util";
 
-const wsLink = new WebSocketLink({
+export const wsLink = new WebSocketLink({
 	uri: `ws://127.0.0.1:4000/graphql`,
 	options: {
 		reconnect: true,
-		connectionParams: getCookies(),
+		//pass a functions to ensure that latest values are read
+		//otherwise connectionParams will be assigned stale value of cookie
+		connectionParams: () => getCookies(),
 	},
 });
-
 const httpLink = createHttpLink({
 	uri: "http://127.0.0.1:4000/graphql",
 	credentials: "include",

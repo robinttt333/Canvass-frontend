@@ -1,9 +1,6 @@
-import React from "react";
 import hdate from "human-date";
 import { decode } from "jsonwebtoken";
 import Cookies from "js-cookie";
-import { useSubscription } from "@apollo/client";
-import { TOGGLE_USER_JOINED_SUBSCRIPTION } from "./graphql/User";
 
 export const resetCookies = () => {
 	try {
@@ -35,15 +32,6 @@ export const getUserfromCookie = () => {
 		console.log(err);
 	}
 	return user;
-};
-
-const Logout = () => {
-	useSubscription(TOGGLE_USER_JOINED_SUBSCRIPTION);
-	return null;
-};
-export const logoutUser = async () => {
-	resetCookies();
-	return <Logout />;
 };
 
 export const getRelativeTime = (time) => {

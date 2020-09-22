@@ -23,6 +23,17 @@ export const LOGIN = gql`
 		}
 	}
 `;
+export const CHANGE_PASSWORD = gql`
+	mutation($oldPassword: String!, $newPassword: String!) {
+		changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+			ok
+			error {
+				path
+				message
+			}
+		}
+	}
+`;
 
 export const TOGGLE_USER_JOINED_SUBSCRIPTION = gql`
 	subscription {

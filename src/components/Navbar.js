@@ -1,15 +1,9 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
-import { logoutUser } from "../util";
 import { useHistory, useParams } from "react-router-dom";
 import { getUserfromCookie } from "../util";
 
 const Navbar = () => {
-	const handleLogout = async (e) => {
-		const res = logoutUser();
-		if (res) return history.push("/login");
-	};
-
 	const param = useParams();
 	const handleItemClick = (_, { name }) => {
 		setState({ activeItem: name });
@@ -25,6 +19,9 @@ const Navbar = () => {
 				break;
 			case "chat":
 				history.push(`/chat/${param.userId}`);
+				break;
+			case "logout":
+				history.push("/logout");
 				break;
 		}
 	};
@@ -75,7 +72,7 @@ const Navbar = () => {
 				position="right"
 				name="logout"
 				active={activeItem === "logout"}
-				onClick={handleLogout}
+				onClick={handleItemClick}
 			>
 				Logout
 			</Menu.Item>

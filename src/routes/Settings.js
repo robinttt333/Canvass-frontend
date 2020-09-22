@@ -1,15 +1,17 @@
 import { useParams } from "react-router-dom";
 import ProfileImage from "../containers/Settings/ProfileImage";
 import Profile from "../containers/Settings/Profile";
+import Password from "../containers/Settings/Password";
 import styled from "styled-components";
 import React from "react";
 import { GET_USER } from "../graphql/User";
 import { useQuery } from "@apollo/client";
 const ProfileSettingsWrapper = styled.div`
 	display: grid;
+	height: 100%;
 	padding: 10px;
 	grid-template-columns: 25% 75%;
-	grid-template-rows: 40% 60%;
+	grid-template-rows: 50% 50%;
 `;
 
 const Settings = () => {
@@ -27,6 +29,7 @@ const Settings = () => {
 				username={username}
 				profile={profile}
 			/>
+			<Password />
 		</ProfileSettingsWrapper>
 	);
 };
