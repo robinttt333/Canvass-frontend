@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Canvass
 
-## Available Scripts
+Canvass is a social netoworking application built using `react` + `graphql` + `apollo Server` + `sequelize`.Here are some of its features:
 
-In the project directory, you can run:
+  - Signup and Login
+  - Realtime news feed
+  - Realtime messaging
+  - Custom profile section with updates
+  - Realtime posts + comments
 
-### `yarn start`
+### Tech
+As mentioned previously `Canvass` uses the following technologies
+* [Apollo Server] - A community-maintained open-source GraphQL server
+* [Graphql] - An open-source data query and manipulation language for APIs
+* [Reactjs] -  An open-source JavaScript library for building user interfaces or UI components
+* [Semantic UI] - A UI framework designed for theming
+* [Express] - A web application framework for Node.js
+* [Sequelize] - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Installation
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Clone the repo and run 
 
-### `yarn test`
+```js
+yarn
+```
+or 
+```js
+npm install
+```
+to install the necessary packages.Once that is done just run 
+```js
+npm start
+```
+and you will have a react app running if the repo is `Canvass-frontend`
+or apollo server if it is `Canvass-backend`.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Todos
+This is an ongoing project so there are many issues with it
+ - fixing navigation
+ - ability to create groups
+ - adding markdown facility to create new posts
+ - realtime notifications
 
-### `yarn build`
+License
+----
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+MIT
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Free Software, Hell Yeah!**
 
-### `yarn eject`
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+   [Sequelize]: <https://sequelize.org/>
+   [Reactjs]: <https://reactjs.org/>
+   [Apollo Server]: <https://www.apollographql.com/docs/apollo-server/>
+   [Graphql]: <https://graphql.org/>
+   [Semantic UI]: <https://semantic-ui.com/>
+   
