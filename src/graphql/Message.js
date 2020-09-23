@@ -3,13 +3,22 @@ import { gql } from "@apollo/client";
 export const GET_CHAT_MEMBERS = gql`
 	query {
 		getChatMembers {
-			id
-			username
-			profile {
-				dp
-				lastSeen
+			user {
+				id
+				username
+				profile {
+					dp
+					lastSeen
+				}
 			}
+			unreadMessagesCount
 		}
+	}
+`;
+
+export const GET_UNREAD_MESSAGES_COUNT = gql`
+	query {
+		getUnreadMessagesCount
 	}
 `;
 

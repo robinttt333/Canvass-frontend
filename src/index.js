@@ -24,7 +24,7 @@ ReactDOM.render(
 				<PrivateRoute path="/profile/:userId" component={Profile} />
 				<PrivateRoute path="/settings/:userId" component={Settings} />
 				<PrivateRoute path="/group/:groupId" component={Group} />
-				<PrivateRoute path="/chat/:userId" component={Chat} />
+				<PrivateRoute path="/chat/:userId?" component={Chat} />
 			</Switch>
 		</Router>
 	</ApolloProvider>,

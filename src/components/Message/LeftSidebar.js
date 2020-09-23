@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
-import { Menu, Image, Dimmer, Loader } from "semantic-ui-react";
+import { Header, Label, Menu, Image, Dimmer, Loader } from "semantic-ui-react";
 import React from "react";
 import {
 	GET_CHAT_MEMBERS,
@@ -16,6 +16,7 @@ const LeftSidebarWrapper = styled.div`
 	position: fixed;
 	width: 15%;
 	grid-column: 1 / span 1;
+	text-align: center;
 `;
 
 const LastSeen = ({ lastSeen }) => {
@@ -32,8 +33,10 @@ const LastSeen = ({ lastSeen }) => {
 };
 
 const LeftSidebar = ({ user }) => {
-	const { subscribeToMore, loading, data } = useQuery(GET_CHAT_MEMBERS);
-	const userId = user.id;
+	const { subscribeToMore, loading, data } = useQuery(GET_CHAT_MEMBERS, {
+		fetchPolicy: "network-only",
+	});
+	const userId = user && user.id;
 	// change last seen of user accordingly
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
@@ -79,36 +82,58 @@ const LeftSidebar = ({ user }) => {
 		);
 
 	let chatMembers = data.getChatMembers;
-	let found = false;
-	chatMembers.forEach(({ id }) => {
-		if (!found) found = id === user.id;
-	});
-	if (!found) chatMembers = [user, ...chatMembers];
+	if (userId) {
+		let found = false;
+		chatMembers.forEach((member) => {
+			if (member.id === userId) found = true;
+		});
+
+		if (!found)
+			chatMembers = [{ user, unreadMessagesCount: 0 }, ...chatMembers];
+	}
 	const activeItem = userId;
 	return (
 		<LeftSidebarWrapper>
 			<Menu fluid tabular vertical size="large">
-				{chatMembers.map(({ id, username, profile: { dp, lastSeen } }) => (
-					<Link to={`/chat/${id}`} key={id}>
-						<Menu.Item active={activeItem === id}>
-							<Image src={dp} avatar style={{ marginRight: "10px" }} />
-							{username}
-							<br />
-							<small
-								style={{
-									position: "relative",
-									left: "40px",
-									bottom: "10px",
-									color: "grey",
-									fontWeight: "normal",
-									fontSize: ".2em",
-								}}
-							>
-								<LastSeen lastSeen={lastSeen} />
-							</small>
-						</Menu.Item>
-					</Link>
-				))}
+				{chatMembers.length ? (
+					chatMembers.map(
+						({
+							unreadMessagesCount,
+							user: {
+								id,
+								username,
+								profile: { dp, lastSeen },
+							},
+						}) => (
+							<Link to={`/chat/${id}`} key={id}>
+								<Menu.Item active={activeItem === id}>
+									<Image src={dp} avatar style={{ marginRight: "10px" }} />
+									{username}
+									{unreadMessagesCount ? (
+										<Label color="red" size="mini" style={{ top: ".1em" }}>
+											{unreadMessagesCount}
+										</Label>
+									) : null}
+									<br />
+									<small
+										style={{
+											position: "relative",
+											left: "40px",
+											bottom: "10px",
+											color: "grey",
+											fontWeight: "normal",
+											fontSize: ".2em",
+										}}
+									>
+										<LastSeen lastSeen={lastSeen} />
+									</small>
+								</Menu.Item>
+							</Link>
+						)
+					)
+				) : (
+					<Header style={{ marginTop: "10px" }}>Sorry nothing here </Header>
+				)}
 			</Menu>
 		</LeftSidebarWrapper>
 	);
