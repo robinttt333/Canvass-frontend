@@ -85,7 +85,7 @@ const LeftSidebar = ({ user }) => {
 	if (userId) {
 		let found = false;
 		chatMembers.forEach((member) => {
-			if (member.id === userId) found = true;
+			if (member.user.id === userId) found = true;
 		});
 
 		if (!found)

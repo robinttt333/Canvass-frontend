@@ -6,17 +6,20 @@ import MessageList from "../../components/Message/MessageList";
 import NewMessage from "./NewMessage";
 import { NEW_MESSAGE_SUBSCRIPTION } from "../../graphql/Message";
 import styled from "styled-components";
-
-const CurrentChatWrapper = styled.div`
-	height: 100%;
-	width: 100%;
+import { Redirect } from "react-router-dom";
+const HeaderWrapper = styled.div`
 	grid-column: 2 / span 1;
-	overflow: hidden;
+	grid-row: 1 / span 1;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 0;
+	overflow: auto;
 `;
 
 const CurrentChat = ({ user }) => {
 	const userId = user && user.id ? user.id : -1;
 	const username = user && user.username;
+	//check if userId is invalid
 	const { subscribeToMore, loading, data } = useQuery(GET_CHAT, {
 		variables: {
 			userId,
@@ -36,40 +39,41 @@ const CurrentChat = ({ user }) => {
 		return () => unsubscribe();
 		//eslint-disable-next-line
 	}, [userId]);
+	if (userId !== -1 && !username) {
+		return <Redirect to="/group/1" />;
+	}
 	if (loading) return null;
 	const messages = data && data.getChat ? data.getChat : [];
 
 	return (
-		<CurrentChatWrapper>
+		<React.Fragment>
 			{user && messages.length ? (
 				<MessageList userId={userId} messages={messages} />
 			) : null}
 			{user && messages.length === 0 ? (
-				<Header
-					style={{
-						height: "100%",
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				>
-					Start a conversation with {username}
-				</Header>
+				<HeaderWrapper>
+					<Header
+						style={{
+							textAlign: "center",
+						}}
+					>
+						Start a conversation with {username}
+					</Header>
+				</HeaderWrapper>
 			) : null}
 			{!user ? (
-				<Header
-					style={{
-						height: "100%",
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				>
-					Select a user to continue your conversation
-				</Header>
+				<HeaderWrapper>
+					<Header
+						style={{
+							textAlign: "center",
+						}}
+					>
+						Select a user to continue your conversation
+					</Header>
+				</HeaderWrapper>
 			) : null}
 			{user ? <NewMessage receiver={userId} /> : null}
-		</CurrentChatWrapper>
+		</React.Fragment>
 	);
 };
 export default CurrentChat;

@@ -27,6 +27,10 @@ const Chat = () => {
 	if (me === parseInt(userId)) return <Redirect to={`/profile/${me}`} />;
 	if (loading) return null;
 	const user = data && data.getUser;
+	//userId is valid number but no such user exists
+	if (userId !== -1 && !user) {
+		return <Redirect to="/group/1" />;
+	}
 	return (
 		<ChatWrapper>
 			<LeftSidebar user={user} />
