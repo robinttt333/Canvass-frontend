@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { Header, List, Icon, Image } from "semantic-ui-react";
+import { Header, List, Image } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import PlainSegment from "./PlainSegment";
 import { GET_USER_GROUPS } from "../graphql/Group";

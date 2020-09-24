@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import ProfileImageAndUserDetails from "../components/ProfileImageAndUserDetails";
-import UserDetails from "../components/UserDetails";
+import UserDetails from "../containers/Profile/UserDetails";
 import { Grid, Segment } from "semantic-ui-react";
 import { GET_PROFILE_QUERY } from "../graphql/Profile";
 import { useParams } from "react-router-dom";
