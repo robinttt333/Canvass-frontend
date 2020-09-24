@@ -16,7 +16,6 @@ const LeftSidebarWrapper = styled.div`
 	position: fixed;
 	width: 15%;
 	grid-column: 1 / span 1;
-	text-align: center;
 `;
 
 const LastSeen = ({ lastSeen }) => {

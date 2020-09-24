@@ -11,6 +11,7 @@ export const GET_PROFILE_QUERY = gql`
 			dp
 			gender
 			createdAt
+			friends
 			user {
 				username
 				email

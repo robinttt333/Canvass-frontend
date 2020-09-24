@@ -26,7 +26,7 @@ const Group = () => {
 	const visible = data.getGroup.public;
 	return (
 		<GroupPageWrapper>
-			<LeftSidebar />
+			<LeftSidebar name={name} />
 			<GroupComponent
 				admin={admin}
 				createdAt={createdAt}

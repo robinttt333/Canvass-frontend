@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import ProfileImageAndUserDetails from "../components/ProfileImageAndUserDetails";
+import ProfileImageAndUserDetails from "../containers/Profile/ProfileImageAndUserDetails";
 import UserDetails from "../containers/Profile/UserDetails";
 import { Grid, Segment } from "semantic-ui-react";
 import { GET_PROFILE_QUERY } from "../graphql/Profile";
@@ -15,6 +15,7 @@ const Profile = () => {
 	const { loading, data } = useQuery(GET_PROFILE_QUERY, {
 		variables: { userId: parseInt(userId) },
 		fetchPolicy: "network-only",
+		pollInterval: 500,
 	});
 	if (loading) return null;
 	const profile = data.getProfile;
@@ -28,6 +29,8 @@ const Profile = () => {
 						status={profile.status}
 						email={profile.user.email}
 						createdAt={profile.createdAt}
+						friends={profile.friends}
+						userId={userId}
 					/>
 					<UserDetails
 						userId={userId}

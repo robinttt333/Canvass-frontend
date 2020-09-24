@@ -32,7 +32,7 @@ const CurrentChat = ({ user }) => {
 			updateQuery: (prev, { subscriptionData }) => {
 				if (!subscriptionData.data) return prev;
 				return {
-					getChat: [...prev.getChat, subscriptionData.data.messageAdded],
+					getChat: [subscriptionData.data.messageAdded, ...prev.getChat],
 				};
 			},
 		});

@@ -1,5 +1,6 @@
 import React from "react";
-import { Modal, Label, Button, Header, Icon } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
+import { Modal, Button, Header, Icon } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import {
 	SEND_FRIEND_REQUEST,
@@ -8,6 +9,7 @@ import {
 } from "../../graphql/Friend";
 
 export default ({ userId, status }) => {
+	const history = useHistory();
 	const [sendFriendRequest] = useMutation(SEND_FRIEND_REQUEST);
 	const [acceptFriendRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
 	const [cancelFriendRequest] = useMutation(CANCEL_FRIEND_REQUEST);
@@ -74,10 +76,10 @@ export default ({ userId, status }) => {
 						</Button>
 					) : null}
 					{status === "CONFIRMED" ? (
-						<Label size="mini" disabled>
-							<Icon name="group" />
-							Friends
-						</Label>
+						<Button size="mini" onClick={() => history.push(`/chat/${userId}`)}>
+							<Icon name="mail" />
+							Send Message
+						</Button>
 					) : null}
 				</Header.Content>
 			</Header>

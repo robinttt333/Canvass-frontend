@@ -57,20 +57,22 @@ export default ({ firstName, lastName, dob, gender, userId }) => {
 						</Segment>
 					</Grid.Column>
 				</Grid.Row>
-				<Grid.Row>
-					<Grid.Column>
-						<Header as="h5">
-							<Icon
-								name="settings"
-								link
-								onClick={() => history.push(`/settings/${userId}`)}
-							/>
-							<Header.Content>
-								<Link to={`/settings/${userId}`}>Manage Profile</Link>
-							</Header.Content>
-						</Header>
-					</Grid.Column>
-				</Grid.Row>
+				{me === parseInt(userId) ? (
+					<Grid.Row>
+						<Grid.Column>
+							<Header as="h5">
+								<Icon
+									name="settings"
+									link
+									onClick={() => history.push(`/settings/${userId}`)}
+								/>
+								<Header.Content>
+									<Link to={`/settings/${userId}`}>Manage Profile</Link>
+								</Header.Content>
+							</Header>
+						</Grid.Column>
+					</Grid.Row>
+				) : null}
 			</Grid>
 		</Grid.Column>
 	);

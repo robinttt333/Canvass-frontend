@@ -1,7 +1,6 @@
 import React from "react";
 import { Comment, Segment } from "semantic-ui-react";
-import hdate from "human-date";
-import { getUserfromCookie } from "../../util";
+import { getRelativeTime, getUserfromCookie } from "../../util";
 import styled from "styled-components";
 
 const MessageListWrapper = styled.div`
@@ -51,7 +50,7 @@ const MessageList = ({ messages }) => {
 										{username}
 									</Comment.Author>
 									<Comment.Metadata>
-										<div>{hdate.relativeTime(createdAt)}</div>
+										<div>{getRelativeTime(createdAt)}</div>
 									</Comment.Metadata>
 									<Comment.Text>{content}</Comment.Text>
 								</Comment.Content>
