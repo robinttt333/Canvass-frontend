@@ -9,6 +9,7 @@ export const GET_UNREAD_NOTIFICATIONS = gql`
 				username
 				profile {
 					dp
+					id
 				}
 			}
 			read
@@ -63,6 +64,14 @@ export const NEW_NOTIFICATION_SUBSCRIPTION = gql`
 				id
 				name
 			}
+		}
+	}
+`;
+
+export const MARK_NOTIFICATIONS_AS_READ = gql`
+	mutation {
+		markNotificationsAsRead {
+			ok
 		}
 	}
 `;

@@ -28,9 +28,22 @@ const splitLink = split(
 	wsLink,
 	httpLink
 );
+//define a custom merge function for updating cache
 const client = new ApolloClient({
 	link: splitLink,
-	cache: new InMemoryCache(),
+	cache: new InMemoryCache({
+		typePolicies: {
+			Query: {
+				fields: {
+					getUnreadNotifications: {
+						merge(_, incoming) {
+							return [...incoming];
+						},
+					},
+				},
+			},
+		},
+	}),
 });
 
 export default client;

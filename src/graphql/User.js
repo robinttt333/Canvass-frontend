@@ -41,6 +41,7 @@ export const TOGGLE_USER_JOINED_SUBSCRIPTION = gql`
 			id
 			username
 			profile {
+				id
 				dp
 				lastSeen
 			}
@@ -55,6 +56,7 @@ export const GET_USER = gql`
 			id
 			profile {
 				dp
+				id
 				dob
 				lastSeen
 				firstName
@@ -71,6 +73,7 @@ export const GET_FRIENDS = gql`
 			id
 			username
 			profile {
+				id
 				dp
 				status
 			}

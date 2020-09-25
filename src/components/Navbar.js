@@ -12,7 +12,9 @@ import {
 import Notifications from "../containers/Notifications";
 
 const Navbar = () => {
-	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {});
+	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {
+		fetchPolicy: "network-only",
+	});
 	const history = useHistory();
 	const location = history.location.pathname.split("/")[1];
 	const [activeItem, setActiveItem] = React.useState(location);
@@ -21,7 +23,9 @@ const Navbar = () => {
 		subscribeToMore,
 		loading: loadingNotifications,
 		data: unreadNotificationsData,
-	} = useQuery(GET_UNREAD_NOTIFICATIONS, {});
+	} = useQuery(GET_UNREAD_NOTIFICATIONS, {
+		fetchPolicy: "network-only",
+	});
 
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({

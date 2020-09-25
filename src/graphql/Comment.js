@@ -23,6 +23,7 @@ export const NEW_COMMENT_SUBSCRIPTION = gql`
 				username
 				profile {
 					dp
+					id
 				}
 			}
 		}
@@ -39,6 +40,7 @@ export const GET_COMMENTS_QUERY = gql`
 				id
 				username
 				profile {
+					id
 					dp
 				}
 			}

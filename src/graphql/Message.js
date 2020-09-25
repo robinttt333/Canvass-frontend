@@ -7,6 +7,7 @@ export const GET_CHAT_MEMBERS = gql`
 				id
 				username
 				profile {
+					id
 					dp
 					lastSeen
 				}
@@ -32,6 +33,7 @@ export const GET_CHAT = gql`
 				id
 				profile {
 					dp
+					id
 				}
 			}
 			createdAt
@@ -60,6 +62,7 @@ export const NEW_MESSAGE_SUBSCRIPTION = gql`
 			sender {
 				username
 				profile {
+					id
 					dp
 				}
 			}
@@ -74,6 +77,7 @@ export const NEW_CHAT_MEMBER_SUBSCRIPTION = gql`
 			id
 			profile {
 				dp
+				id
 				lastSeen
 			}
 		}

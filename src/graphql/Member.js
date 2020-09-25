@@ -8,6 +8,7 @@ export const GET_GROUP_MEMBERS = gql`
 				username
 				profile {
 					dp
+					id
 				}
 			}
 			memberSince
@@ -23,6 +24,7 @@ export const NEW_GROUP_MEMBER_SUBSCRIPTION = gql`
 				username
 				profile {
 					dp
+					id
 				}
 			}
 			memberSince

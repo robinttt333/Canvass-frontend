@@ -33,6 +33,7 @@ export const GET_POSTS_QUERY = gql`
 				username
 				profile {
 					dp
+					id
 				}
 			}
 		}
@@ -52,6 +53,7 @@ export const NEW_POST_SUBSCRIPTION = gql`
 				username
 				profile {
 					dp
+					id
 				}
 			}
 		}
