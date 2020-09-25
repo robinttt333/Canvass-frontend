@@ -1,6 +1,6 @@
 import { getRelativeTime } from "../../util";
 import React from "react";
-import { Image, List, Header } from "semantic-ui-react";
+import { Icon, Image, List, Header } from "semantic-ui-react";
 import PlainSegment from "../PlainSegment";
 
 import {
@@ -40,7 +40,10 @@ const GroupMembersList = ({ groupId }) => {
 				height: "100%",
 			}}
 		>
-			<Header>Group Members</Header>
+			<Header>
+				<Icon name="user circle" />
+				Group Members
+			</Header>
 			<List divided>
 				{members.map(
 					({

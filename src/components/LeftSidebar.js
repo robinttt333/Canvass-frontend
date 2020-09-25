@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { Menu, Label, Header } from "semantic-ui-react";
+import { Icon, Menu, Label, Header } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import PlainSegment from "./PlainSegment";
 import { GET_USER_GROUPS } from "../graphql/Group";
@@ -38,8 +38,6 @@ const LeftSidebar = ({ name, groupId }) => {
 				const group = prev.getUserGroups.filter(
 					({ group: { id } }) => id === post.groupId
 				)[0];
-				console.log(group);
-				console.log(prev);
 				// increment the number of unseen posts for this group
 				return {
 					getUserGroups: [
@@ -61,7 +59,10 @@ const LeftSidebar = ({ name, groupId }) => {
 	return (
 		<LeftSidebarWrapper>
 			<PlainSegment style={{ background: "#e6f1f5" }}>
-				<Header>My Groups</Header>
+				<Header>
+					<Icon name="group" />
+					My Groups
+				</Header>
 				<Menu vertical secondary style={{ width: "100%" }}>
 					{groups.map(({ group: { name, id }, unseenPosts }) => (
 						<Menu.Item

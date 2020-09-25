@@ -53,13 +53,13 @@ export default ({ userId, status }) => {
 				<Header.Content>
 					{status === "NONE" ? (
 						<Button onClick={handleButtonClick} size="mini" color="blue">
-							<Icon name="group" />
+							<Icon name="user plus" />
 							Send Friend Request
 						</Button>
 					) : null}
 					{status === "PENDING" ? (
 						<Button size="mini" disabled>
-							<Icon name="group" />
+							<Icon name="user plus" />
 							Friend Request Pending
 						</Button>
 					) : null}
