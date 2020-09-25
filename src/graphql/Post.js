@@ -57,3 +57,12 @@ export const NEW_POST_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const NEW_POST_TO_MY_GROUP_SUBSCRIPTION = gql`
+	subscription {
+		postAddedToMyGroup {
+			createdAt
+			groupId
+		}
+	}
+`;

@@ -12,6 +12,7 @@ const Group = () => {
 	const { groupId } = useParams();
 	const { loading, data } = useQuery(GET_GROUP_QUERY, {
 		variables: { groupId: parseInt(groupId) },
+		fetchPolicy: "network-only",
 	});
 	if (loading)
 		return (
@@ -26,7 +27,7 @@ const Group = () => {
 	const visible = data.getGroup.public;
 	return (
 		<GroupPageWrapper>
-			<LeftSidebar name={name} />
+			<LeftSidebar groupId={parseInt(groupId)} name={name} />
 			<GroupComponent
 				admin={admin}
 				createdAt={createdAt}

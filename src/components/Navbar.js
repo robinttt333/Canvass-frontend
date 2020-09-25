@@ -6,9 +6,7 @@ import { useQuery } from "@apollo/client";
 import { GET_UNREAD_MESSAGES_COUNT } from "../graphql/Message";
 
 const Navbar = () => {
-	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {
-		pollInterval: 500,
-	});
+	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {});
 	//select active item from url
 	const history = useHistory();
 	const location = history.location.pathname.split("/")[1];

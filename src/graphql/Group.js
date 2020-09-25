@@ -17,10 +17,13 @@ export const GET_GROUP_QUERY = gql`
 export const GET_USER_GROUPS = gql`
 	{
 		getUserGroups {
-			id
-			name
-			image
-			members
+			group {
+				id
+				name
+				image
+				members
+			}
+			unseenPosts
 		}
 	}
 `;
