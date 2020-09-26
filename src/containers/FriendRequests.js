@@ -5,6 +5,7 @@ import { gql } from "@apollo/client";
 import { MARK_FRIEND_REQUEST_NOTIFICATIONS_AS_READ } from "../graphql/Notification";
 import { useMutation } from "@apollo/client";
 import client from "../apollo";
+import { getUserfromCookie } from "../util";
 
 // importing GET_UNREAD_NOTIFICATIONS does not work
 const query = gql`
@@ -57,12 +58,12 @@ const FriendRequests = ({ unreadFriendRequestNotifications }) => {
 			fluid
 		>
 			<Dropdown.Menu>
-				<Dropdown.Header icon="tags" content="Notifications" />
+				<Dropdown.Header icon="user" content="Friend Requests" />
 				<Dropdown.Divider />
 				{unreadFriendRequestNotifications.length === 0 ? (
 					<Dropdown.Item>
 						<Header as="h5" style={{ textAlign: "center" }}>
-							Nothing here
+							No new friend requests
 						</Header>
 					</Dropdown.Item>
 				) : null}
@@ -85,6 +86,13 @@ const FriendRequests = ({ unreadFriendRequestNotifications }) => {
 						);
 					}
 				)}
+				<Dropdown.Item style={{ textAlign: "center" }}>
+					<b>
+						<Link to={`/notifications/${getUserfromCookie().userId}`}>
+							Show all
+						</Link>
+					</b>
+				</Dropdown.Item>
 			</Dropdown.Menu>
 		</Dropdown>
 	);

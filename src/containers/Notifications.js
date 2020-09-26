@@ -5,6 +5,7 @@ import { gql } from "@apollo/client";
 import { MARK_NOTIFICATIONS_AS_READ } from "../graphql/Notification";
 import { useMutation } from "@apollo/client";
 import client from "../apollo";
+import { getUserfromCookie } from "../util";
 
 // importing GET_UNREAD_NOTIFICATIONS does not work
 const query = gql`
@@ -71,14 +72,14 @@ const Notifications = ({ unreadNotifications }) => {
 				{unreadNotifications.length === 0 ? (
 					<Dropdown.Item>
 						<Header as="h5" style={{ textAlign: "center" }}>
-							Nothing here
+							No new notifications
 						</Header>
 					</Dropdown.Item>
 				) : null}
 				{unreadNotifications.map(
 					({ target, sender, group, object, id, text, post }) => {
 						return (
-							<Dropdown.Item key={id}>
+							<Dropdown.Item key={id} style={{ minWidth: "400px" }}>
 								<b>
 									<Link to={`/profile/${sender.id}`}>
 										<Image avatar src={sender.profile.dp} />
@@ -106,6 +107,13 @@ const Notifications = ({ unreadNotifications }) => {
 						);
 					}
 				)}
+				<Dropdown.Item style={{ textAlign: "center" }}>
+					<b>
+						<Link to={`/notifications/${getUserfromCookie().userId}`}>
+							Show all
+						</Link>
+					</b>
+				</Dropdown.Item>
 			</Dropdown.Menu>
 		</Dropdown>
 	);

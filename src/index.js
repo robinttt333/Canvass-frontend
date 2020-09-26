@@ -13,6 +13,8 @@ import Group from "./routes/Group";
 import Chat from "./routes/Chat";
 import Settings from "./routes/Settings";
 import Logout from "./routes/Logout";
+import Notification from "./routes/Notification";
+
 // Switch added to redirect from login page
 ReactDOM.render(
 	<ApolloProvider client={client}>
@@ -25,6 +27,7 @@ ReactDOM.render(
 				<PrivateRoute path="/settings/:userId" component={Settings} />
 				<PrivateRoute path="/group/:groupId" component={Group} />
 				<PrivateRoute path="/chat/:userId?" component={Chat} />
+				<PrivateRoute path="/notifications/:userId?" component={Notification} />
 			</Switch>
 		</Router>
 	</ApolloProvider>,

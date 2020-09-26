@@ -119,3 +119,35 @@ export const MARK_FRIEND_REQUEST_NOTIFICATIONS_AS_READ = gql`
 		}
 	}
 `;
+
+export const GET_ALL_NOTIFICATIONS = gql`
+	query {
+		getAllNotifications {
+			id
+			createdAt
+			sender {
+				id
+				username
+				profile {
+					dp
+					id
+				}
+			}
+			read
+			verb
+			text
+			object
+			target
+			post {
+				id
+			}
+			comment {
+				id
+			}
+			group {
+				id
+				name
+			}
+		}
+	}
+`;

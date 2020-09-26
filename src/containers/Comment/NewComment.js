@@ -54,6 +54,7 @@ const NewComment = ({
 					onChange={formik.handleChange}
 					value={formik.values.content}
 					error={formik.errors.content}
+					style={{ minWidth: "500px" }}
 					name="content"
 				/>
 			</Ref>
