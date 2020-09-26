@@ -40,6 +40,11 @@ const client = new ApolloClient({
 							return [...incoming];
 						},
 					},
+					getUnreadFriendRequestNotifications: {
+						merge(_, incoming) {
+							return [...incoming];
+						},
+					},
 				},
 			},
 		},

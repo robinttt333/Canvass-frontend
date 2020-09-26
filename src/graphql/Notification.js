@@ -75,3 +75,47 @@ export const MARK_NOTIFICATIONS_AS_READ = gql`
 		}
 	}
 `;
+
+export const NEW_FRIEND_REQUEST_NOTIFICATION_SUBSCRIPTION = gql`
+	subscription {
+		friendRequestNotificationAdded {
+			id
+			sender {
+				id
+				username
+				profile {
+					dp
+				}
+			}
+			verb
+			text
+			object
+		}
+	}
+`;
+
+export const GET_UNREAD_FRIEND_REQUEST_NOTIFICATIONS = gql`
+	{
+		getUnreadFriendRequestNotifications {
+			id
+			sender {
+				id
+				username
+				profile {
+					dp
+				}
+			}
+			verb
+			text
+			object
+		}
+	}
+`;
+
+export const MARK_FRIEND_REQUEST_NOTIFICATIONS_AS_READ = gql`
+	mutation {
+		markFriendRequestNotificationsAsRead {
+			ok
+		}
+	}
+`;

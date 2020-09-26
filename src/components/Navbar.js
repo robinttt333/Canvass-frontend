@@ -4,12 +4,17 @@ import { useHistory } from "react-router-dom";
 import { getUserfromCookie } from "../util";
 import { useQuery } from "@apollo/client";
 import { GET_UNREAD_MESSAGES_COUNT } from "../graphql/Message";
+
 import {
 	NEW_NOTIFICATION_SUBSCRIPTION,
+	GET_UNREAD_FRIEND_REQUEST_NOTIFICATIONS,
+	NEW_FRIEND_REQUEST_NOTIFICATION_SUBSCRIPTION,
 	GET_UNREAD_NOTIFICATIONS,
 	DELETE_NOTIFICATION_SUBSCRIPTION,
 } from "../graphql/Notification";
+
 import Notifications from "../containers/Notifications";
+import FriendRequests from "../containers/FriendRequests";
 
 const Navbar = () => {
 	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {
@@ -20,15 +25,23 @@ const Navbar = () => {
 	const [activeItem, setActiveItem] = React.useState(location);
 
 	const {
-		subscribeToMore,
+		subscribeToMore: subscribeToMoreNotifications,
 		loading: loadingNotifications,
 		data: unreadNotificationsData,
 	} = useQuery(GET_UNREAD_NOTIFICATIONS, {
 		fetchPolicy: "network-only",
 	});
 
+	const {
+		subscribeToMore: subscribeToMoreFriendRequestNotifications,
+		loading: loadingFriendRequestNotifications,
+		data: unreadFriendRequestNotificationsData,
+	} = useQuery(GET_UNREAD_FRIEND_REQUEST_NOTIFICATIONS, {
+		fetchPolicy: "network-only",
+	});
+
 	React.useEffect(() => {
-		const unsubscribe = subscribeToMore({
+		const unsubscribe = subscribeToMoreNotifications({
 			document: NEW_NOTIFICATION_SUBSCRIPTION,
 			updateQuery: (prev, { subscriptionData }) => {
 				return {
@@ -42,9 +55,24 @@ const Navbar = () => {
 		return () => unsubscribe();
 		//eslint-disable-next-line
 	}, []);
+	React.useEffect(() => {
+		const unsubscribe = subscribeToMoreFriendRequestNotifications({
+			document: NEW_FRIEND_REQUEST_NOTIFICATION_SUBSCRIPTION,
+			updateQuery: (prev, { subscriptionData }) => {
+				return {
+					getUnreadFriendRequestNotifications: [
+						subscriptionData.data.friendRequestNotificationAdded,
+						...prev.getUnreadFriendRequestNotifications,
+					],
+				};
+			},
+		});
+		return () => unsubscribe();
+		//eslint-disable-next-line
+	}, []);
 
 	React.useEffect(() => {
-		const unsubscribe = subscribeToMore({
+		const unsubscribe = subscribeToMoreNotifications({
 			document: DELETE_NOTIFICATION_SUBSCRIPTION,
 			updateQuery: (prev, { subscriptionData }) => {
 				const id = subscriptionData.data.notificationDeleted.id;
@@ -61,11 +89,12 @@ const Navbar = () => {
 		//eslint-disable-next-line
 	}, []);
 
-	if (loading || loadingNotifications) return null;
+	if (loading || loadingNotifications || loadingFriendRequestNotifications)
+		return null;
+
 	const unreadNotifications = unreadNotificationsData.getUnreadNotifications;
-
-	if (loading) return null;
-
+	const unreadFriendRequestNotifications =
+		unreadFriendRequestNotificationsData.getUnreadFriendRequestNotifications;
 	const unreadMessagesCount = data.getUnreadMessagesCount;
 
 	const handleItemClick = (_, { name }) => {
@@ -120,6 +149,16 @@ const Navbar = () => {
 			</Menu.Item>
 
 			<Menu.Item position="right" active={activeItem === "notification"}>
+				{unreadFriendRequestNotifications.length ? (
+					<Label color="red" floating size="mini" style={{ top: ".1em" }}>
+						{unreadFriendRequestNotifications.length}
+					</Label>
+				) : null}
+				<FriendRequests
+					unreadFriendRequestNotifications={unreadFriendRequestNotifications}
+				/>
+			</Menu.Item>
+			<Menu.Item active={activeItem === "notification"}>
 				{unreadNotifications.length ? (
 					<Label color="red" floating size="mini" style={{ top: ".1em" }}>
 						{unreadNotifications.length}
