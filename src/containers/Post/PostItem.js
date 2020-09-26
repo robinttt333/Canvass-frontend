@@ -5,6 +5,7 @@ import { GET_POSTS_QUERY, TOGGLE_LIKE_MUTATION } from "../../graphql/Post";
 import { useMutation } from "@apollo/client";
 import CommentListWrapper from "../Comment/CommentListWrapper";
 import { getRelativeTime } from "../../util";
+import ReactMarkdown from "react-markdown";
 
 const PostItem = ({
 	post: {
@@ -65,7 +66,7 @@ const PostItem = ({
 				</Feed.Summary>
 				{/* add this to treak style line breaks properly*/}
 				<Feed.Extra style={{ whiteSpace: "pre-wrap" }} text>
-					{content}
+					<ReactMarkdown source={content} />
 				</Feed.Extra>
 				<Feed.Meta>
 					<Feed.Like

@@ -19,6 +19,7 @@ import FriendRequests from "../containers/FriendRequests";
 const Navbar = () => {
 	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {
 		fetchPolicy: "network-only",
+		pollInterval: 500,
 	});
 	const history = useHistory();
 	const location = history.location.pathname.split("/")[1];
