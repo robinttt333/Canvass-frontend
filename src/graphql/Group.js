@@ -8,7 +8,10 @@ export const GET_GROUP_QUERY = gql`
 			members
 			description
 			image
-			admin
+			admin {
+				username
+				id
+			}
 			createdAt
 			public
 		}
@@ -25,6 +28,19 @@ export const GET_USER_GROUPS = gql`
 				members
 			}
 			unseenPosts
+		}
+	}
+`;
+
+export const CREATE_GROUP_MUTATION = gql`
+	mutation($name: String!, $description: String!, $public: Boolean!) {
+		createGroup(name: $name, description: $description, public: $public) {
+			ok
+			id
+			error {
+				path
+				message
+			}
 		}
 	}
 `;

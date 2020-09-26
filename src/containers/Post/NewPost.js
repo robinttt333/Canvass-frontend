@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
-
 import Editor from "react-markdown-editor-lite";
 import ReactMarkdown from "react-markdown";
 
@@ -60,7 +59,7 @@ const NewPost = () => {
 		}
 	};
 
-	const handleEditorChange = ({ html, text }) => {
+	const handleEditorChange = ({ text }) => {
 		const newValue = text.replace(/\d/g, "");
 		setValue(newValue);
 	};

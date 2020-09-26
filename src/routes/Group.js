@@ -22,13 +22,14 @@ const Group = () => {
 		);
 
 	const {
-		getGroup: { image, admin, createdAt, description, members, name },
+		getGroup: { id, image, admin, createdAt, description, members, name },
 	} = data;
 	const visible = data.getGroup.public;
 	return (
 		<GroupPageWrapper>
 			<LeftSidebar groupId={parseInt(groupId)} name={name} />
 			<GroupComponent
+				id={id}
 				admin={admin}
 				createdAt={createdAt}
 				description={description}

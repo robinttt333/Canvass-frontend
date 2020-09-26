@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { Icon, Menu, Label, Header } from "semantic-ui-react";
+import { Popup, Grid, Icon, Menu, Label, Header } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import PlainSegment from "./PlainSegment";
 import { GET_USER_GROUPS } from "../graphql/Group";
@@ -59,10 +59,28 @@ const LeftSidebar = ({ name, groupId }) => {
 	return (
 		<LeftSidebarWrapper>
 			<PlainSegment style={{ background: "#e6f1f5" }}>
-				<Header>
-					<Icon name="group" />
-					My Groups
-				</Header>
+				<Grid divided="vertically">
+					<Grid.Row columns={2}>
+						<Grid.Column>
+							<Header>
+								<Icon name="group" />
+								My Groups
+							</Header>
+						</Grid.Column>
+						<Grid.Column style={{ textAlign: "right" }}>
+							<Popup
+								content="Create new group"
+								trigger={
+									<Icon
+										link
+										onClick={() => history.push("/group/new")}
+										name="add circle"
+									/>
+								}
+							/>
+						</Grid.Column>
+					</Grid.Row>
+				</Grid>
 				<Menu vertical secondary style={{ width: "100%" }}>
 					{groups.map(({ group: { name, id }, unseenPosts }) => (
 						<Menu.Item

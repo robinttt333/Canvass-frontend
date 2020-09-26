@@ -14,6 +14,7 @@ import Chat from "./routes/Chat";
 import Settings from "./routes/Settings";
 import Logout from "./routes/Logout";
 import Notification from "./routes/Notification";
+import NewGroup from "./routes/NewGroup";
 
 // Switch added to redirect from login page
 ReactDOM.render(
@@ -25,6 +26,7 @@ ReactDOM.render(
 				<Route path="/logout" component={Logout} />
 				<PrivateRoute path="/profile/:userId" component={Profile} />
 				<PrivateRoute path="/settings/:userId" component={Settings} />
+				<PrivateRoute path="/group/new/" component={NewGroup} />
 				<PrivateRoute path="/group/:groupId" component={Group} />
 				<PrivateRoute path="/chat/:userId?" component={Chat} />
 				<PrivateRoute path="/notifications/:userId?" component={Notification} />

@@ -11,6 +11,7 @@ const GroupWrapper = styled.div`
 `;
 
 const Group = ({
+	id,
 	image,
 	admin,
 	visible,
@@ -22,6 +23,7 @@ const Group = ({
 	return (
 		<GroupWrapper>
 			<GroupDescription
+				id={id}
 				image={image}
 				name={name}
 				admin={admin}
