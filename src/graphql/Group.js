@@ -44,3 +44,39 @@ export const CREATE_GROUP_MUTATION = gql`
 		}
 	}
 `;
+
+export const GET_GROUP_INVITES = gql`
+	query {
+		getGroupInvites {
+			id
+			group {
+				name
+				id
+			}
+			sender {
+				id
+				username
+				profile {
+					dp
+				}
+			}
+			createdAt
+		}
+	}
+`;
+
+export const ACCEPT_GROUP_INVITE = gql`
+	mutation($sender: Int!, $receiver: Int!, $groupId: Int!) {
+		acceptGroupInvite(sender: $sender, receiver: $receiver, groupId: $groupId) {
+			ok
+		}
+	}
+`;
+
+export const CANCEL_GROUP_INVITE = gql`
+	mutation($sender: Int!, $receiver: Int!, $groupId: Int!) {
+		cancelGroupInvite(sender: $sender, receiver: $receiver, groupId: $groupId) {
+			ok
+		}
+	}
+`;

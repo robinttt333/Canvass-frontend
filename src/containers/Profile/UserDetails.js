@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { GET_FRIENDSHIP_STATUS } from "../../graphql/Friend";
 import FriendshipStatus from "../Friend/FriendshipStatus";
 import { getUserfromCookie } from "../../util";
+import GroupInvites from "./GroupInvites";
 
 export default ({ firstName, lastName, dob, gender, userId }) => {
 	const history = useHistory();
@@ -58,20 +59,27 @@ export default ({ firstName, lastName, dob, gender, userId }) => {
 					</Grid.Column>
 				</Grid.Row>
 				{me === parseInt(userId) ? (
-					<Grid.Row>
-						<Grid.Column>
-							<Header as="h5">
-								<Icon
-									name="settings"
-									link
-									onClick={() => history.push(`/settings/${userId}`)}
-								/>
-								<Header.Content>
-									<Link to={`/settings/${userId}`}>Manage Profile</Link>
-								</Header.Content>
-							</Header>
-						</Grid.Column>
-					</Grid.Row>
+					<React.Fragment>
+						<Grid.Row>
+							<Grid.Column>
+								<Header as="h5">
+									<Icon
+										name="settings"
+										link
+										onClick={() => history.push(`/settings/${userId}`)}
+									/>
+									<Header.Content>
+										<Link to={`/settings/${userId}`}>Manage Profile</Link>
+									</Header.Content>
+								</Header>
+							</Grid.Column>
+						</Grid.Row>
+						<Grid.Row>
+							<Grid.Column>
+								<GroupInvites />
+							</Grid.Column>
+						</Grid.Row>
+					</React.Fragment>
 				) : null}
 			</Grid>
 		</Grid.Column>

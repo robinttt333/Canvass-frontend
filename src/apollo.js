@@ -28,27 +28,39 @@ const splitLink = split(
 	wsLink,
 	httpLink
 );
-//define a custom merge function for updating cache
-const client = new ApolloClient({
-	link: splitLink,
-	cache: new InMemoryCache({
-		typePolicies: {
-			Query: {
-				fields: {
-					getUnreadNotifications: {
-						merge(_, incoming) {
-							return [...incoming];
-						},
+export const cache = new InMemoryCache({
+	typePolicies: {
+		Query: {
+			fields: {
+				getNonGroupAndUninvitedMembers: {
+					merge(_, incoming) {
+						return [...incoming];
 					},
-					getUnreadFriendRequestNotifications: {
-						merge(_, incoming) {
-							return [...incoming];
-						},
+				},
+				getGroupInvites: {
+					merge(_, incoming) {
+						return [...incoming];
+					},
+				},
+				getUnreadNotifications: {
+					merge(_, incoming) {
+						return [...incoming];
+					},
+				},
+				getUnreadFriendRequestNotifications: {
+					merge(_, incoming) {
+						return [...incoming];
 					},
 				},
 			},
 		},
-	}),
+	},
+});
+
+//define a custom merge function for updating cache
+const client = new ApolloClient({
+	link: splitLink,
+	cache,
 });
 
 export default client;

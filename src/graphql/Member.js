@@ -32,14 +32,22 @@ export const NEW_GROUP_MEMBER_SUBSCRIPTION = gql`
 	}
 `;
 
-export const ADD_GROUP_MEMBERS = gql`
+export const INVITE_GROUP_MEMBERS = gql`
 	mutation($groupId: Int!, $members: [Int!]!) {
-		addGroupMembers(groupId: $groupId, members: $members) {
+		inviteGroupMembers(groupId: $groupId, members: $members) {
 			ok
 		}
 	}
 `;
 
+export const GET_NON_GROUP_AND_UNINVITED_MEMBERS = gql`
+	query($username: String!, $groupId: Int!) {
+		getNonGroupAndUninvitedMembers(username: $username, groupId: $groupId) {
+			username
+			id
+		}
+	}
+`;
 export const GET_NON_GROUP_MEMBERS = gql`
 	query($username: String!, $groupId: Int!) {
 		getNonGroupMembers(username: $username, groupId: $groupId) {

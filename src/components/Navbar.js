@@ -13,8 +13,9 @@ import {
 	DELETE_NOTIFICATION_SUBSCRIPTION,
 } from "../graphql/Notification";
 
-import Notifications from "../containers/Notifications";
-import FriendRequests from "../containers/FriendRequests";
+import Notifications from "../containers/Navbar/Notifications";
+import FriendRequests from "../containers/Navbar/FriendRequests";
+import GroupInvites from "../containers/Navbar/GroupInvites";
 
 const Navbar = () => {
 	const { loading, data } = useQuery(GET_UNREAD_MESSAGES_COUNT, {
@@ -150,6 +151,9 @@ const Navbar = () => {
 			</Menu.Item>
 
 			<Menu.Item position="right" active={activeItem === "notification"}>
+				<GroupInvites />
+			</Menu.Item>
+			<Menu.Item active={activeItem === "notification"}>
 				{unreadFriendRequestNotifications.length ? (
 					<Label color="red" floating size="mini" style={{ top: ".1em" }}>
 						{unreadFriendRequestNotifications.length}

@@ -4,7 +4,7 @@ import { Grid, Icon, Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import PlainSegment from "../PlainSegment";
 import { getUserfromCookie } from "../../util";
-import AddMembersModal from "./AddMembersModal";
+import InviteMembersModal from "./InviteMembersModal";
 
 const GroupDescription = ({
 	id,
@@ -80,7 +80,7 @@ const GroupDescription = ({
 				<Grid.Column width={12}>{description}</Grid.Column>
 			</Grid>
 			{open ? (
-				<AddMembersModal
+				<InviteMembersModal
 					groupId={id}
 					name={name}
 					open={open}

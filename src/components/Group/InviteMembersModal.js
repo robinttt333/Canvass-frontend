@@ -1,6 +1,6 @@
 import React from "react";
-import { GET_NON_GROUP_MEMBERS } from "../../graphql/Member";
-import { ADD_GROUP_MEMBERS } from "../../graphql/Member";
+import { GET_NON_GROUP_AND_UNINVITED_MEMBERS } from "../../graphql/Member";
+import { INVITE_GROUP_MEMBERS } from "../../graphql/Member";
 import { Message, Button, Modal } from "semantic-ui-react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -14,18 +14,18 @@ import { useQuery, useMutation } from "@apollo/client";
 
 const animatedComponents = makeAnimated();
 
-const AddMembersModal = ({ groupId, name, open, setOpen }) => {
-	const { loading, data } = useQuery(GET_NON_GROUP_MEMBERS, {
+const InviteMembersModal = ({ groupId, name, open, setOpen }) => {
+	const { loading, data } = useQuery(GET_NON_GROUP_AND_UNINVITED_MEMBERS, {
 		variables: { username: "", groupId: parseInt(groupId) },
 		fetchPolicy: "network-only",
 	});
-	const [addGroupMembers] = useMutation(ADD_GROUP_MEMBERS);
+	const [inviteGroupMembers] = useMutation(INVITE_GROUP_MEMBERS);
 	const [selectedOptions, setSelectedOptions] = React.useState(null);
 	const [success, setSuccess] = React.useState(false);
 	const [res, setRes] = React.useState({});
 
 	if (loading) return null;
-	const nonMembers = data.getNonGroupMembers;
+	const nonMembers = data.getNonGroupAndUninvitedMembers;
 	const options = nonMembers.map(({ username, id }) => ({
 		value: id,
 		label: username,
@@ -36,9 +36,9 @@ const AddMembersModal = ({ groupId, name, open, setOpen }) => {
 		const members = selectedOptions.map(({ value }) => value);
 		const {
 			data: {
-				addGroupMembers: { ok },
+				inviteGroupMembers: { ok },
 			},
-		} = await addGroupMembers({
+		} = await inviteGroupMembers({
 			variables: { groupId: parseInt(groupId), members },
 		});
 
@@ -98,4 +98,4 @@ const AddMembersModal = ({ groupId, name, open, setOpen }) => {
 		</Modal>
 	);
 };
-export default AddMembersModal;
+export default InviteMembersModal;

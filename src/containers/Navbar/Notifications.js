@@ -2,10 +2,10 @@ import React from "react";
 import { Header, Dropdown, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { gql } from "@apollo/client";
-import { MARK_NOTIFICATIONS_AS_READ } from "../graphql/Notification";
+import { MARK_NOTIFICATIONS_AS_READ } from "../../graphql/Notification";
 import { useMutation } from "@apollo/client";
-import client from "../apollo";
-import { getUserfromCookie } from "../util";
+import client from "../../apollo";
+import { getUserfromCookie } from "../../util";
 
 // importing GET_UNREAD_NOTIFICATIONS does not work
 const query = gql`

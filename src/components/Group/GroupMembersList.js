@@ -2,7 +2,7 @@ import { getRelativeTime } from "../../util";
 import React from "react";
 import { Icon, Image, List, Header } from "semantic-ui-react";
 import PlainSegment from "../PlainSegment";
-
+import { getUserfromCookie } from "../../util";
 import {
 	GET_GROUP_MEMBERS,
 	NEW_GROUP_MEMBER_SUBSCRIPTION,
@@ -54,11 +54,13 @@ const GroupMembersList = ({ groupId }) => {
 						},
 						memberSince,
 					}) => (
-						<List.Item key={username}>
+						<List.Item key={id}>
 							<Image avatar src={dp} />
 							<List.Content>
 								<Link to={`/profile/${id}`}>
-									<List.Header>{username}</List.Header>
+									<List.Header>
+										{id === getUserfromCookie().userId ? "me" : username}
+									</List.Header>
 									Joined {getRelativeTime(memberSince)}
 								</Link>
 							</List.Content>
