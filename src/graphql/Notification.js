@@ -151,3 +151,55 @@ export const GET_ALL_NOTIFICATIONS = gql`
 		}
 	}
 `;
+
+export const GET_UNREAD_GROUP_INVITE_NOTIFICATIONS = gql`
+	{
+		getUnreadGroupInviteNotifications {
+			id
+			createdAt
+			sender {
+				id
+				username
+				profile {
+					dp
+					id
+				}
+			}
+			verb
+			text
+			object
+			target
+			targetId
+			group {
+				id
+				name
+			}
+		}
+	}
+`;
+
+export const NEW_GROUP_INVITE_SUBSCRIPTION = gql`
+	subscription {
+		groupInviteNotificationAdded {
+			id
+			createdAt
+			sender {
+				id
+				username
+				profile {
+					dp
+					id
+				}
+			}
+			verb
+			text
+			object
+			target
+			targetId
+			group {
+				id
+				name
+			}
+		}
+	}
+`;
