@@ -31,3 +31,20 @@ export const NEW_GROUP_MEMBER_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const ADD_GROUP_MEMBERS = gql`
+	mutation($groupId: Int!, $members: [Int!]!) {
+		addGroupMembers(groupId: $groupId, members: $members) {
+			ok
+		}
+	}
+`;
+
+export const GET_NON_GROUP_MEMBERS = gql`
+	query($username: String!, $groupId: Int!) {
+		getNonGroupMembers(username: $username, groupId: $groupId) {
+			username
+			id
+		}
+	}
+`;

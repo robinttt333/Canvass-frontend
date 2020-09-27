@@ -4,6 +4,7 @@ import { Grid, Icon, Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import PlainSegment from "../PlainSegment";
 import { getUserfromCookie } from "../../util";
+import AddMembersModal from "./AddMembersModal";
 
 const GroupDescription = ({
 	id,
@@ -15,6 +16,7 @@ const GroupDescription = ({
 	admin,
 	description,
 }) => {
+	const [open, setOpen] = React.useState(false);
 	return (
 		<PlainSegment placeholder style={{ border: "none", background: "white" }}>
 			<Grid verticalAlign="middle">
@@ -55,11 +57,15 @@ const GroupDescription = ({
 												<Icon
 													link
 													color="blue"
-													onClick={() => console.log("clicked")}
+													onClick={() => setOpen(true)}
 													name="add circle"
 												/>
 												<b>
-													<Link to="#" style={{ color: "#4183C4" }}>
+													<Link
+														to="#"
+														onClick={() => setOpen(true)}
+														style={{ color: "#4183C4" }}
+													>
 														Add members
 													</Link>
 												</b>
@@ -73,6 +79,14 @@ const GroupDescription = ({
 				</Grid.Column>
 				<Grid.Column width={12}>{description}</Grid.Column>
 			</Grid>
+			{open ? (
+				<AddMembersModal
+					groupId={id}
+					name={name}
+					open={open}
+					setOpen={setOpen}
+				/>
+			) : null}
 		</PlainSegment>
 	);
 };

@@ -38,7 +38,7 @@ const PostList = () => {
 
 	const posts = data.getPosts;
 
-	return (
+	return posts.length ? (
 		<PlainSegment>
 			<Feed size="large">
 				{posts.map((post) => (
@@ -46,6 +46,6 @@ const PostList = () => {
 				))}
 			</Feed>
 		</PlainSegment>
-	);
+	) : null;
 };
 export default PostList;
