@@ -57,6 +57,16 @@ export const cache = new InMemoryCache({
 						return [...incoming];
 					},
 				},
+				getChat: {
+					merge(_, incoming) {
+						return [...incoming];
+					},
+				},
+				getChatMembers: {
+					merge(_, incoming) {
+						return [...incoming];
+					},
+				},
 			},
 		},
 	},

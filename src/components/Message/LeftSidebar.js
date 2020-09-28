@@ -41,6 +41,7 @@ const LastSeen = ({ lastSeen }) => {
 
 const LeftSidebar = ({ user }) => {
 	const { subscribeToMore, loading, data } = useQuery(GET_CHAT_MEMBERS, {
+		variables: {},
 		fetchPolicy: "network-only",
 	});
 	const userId = user && user.id;
