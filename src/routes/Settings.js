@@ -6,6 +6,9 @@ import styled from "styled-components";
 import React from "react";
 import { GET_USER } from "../graphql/User";
 import { useQuery } from "@apollo/client";
+import { getUserfromCookie } from "../util";
+import { Redirect } from "react-router-dom";
+
 const ProfileSettingsWrapper = styled.div`
 	display: grid;
 	height: 100%;
@@ -20,6 +23,8 @@ const Settings = () => {
 		variables: { userId: parseInt(userId) },
 		fetchPolicy: "network-only",
 	});
+	const me = getUserfromCookie().userId;
+	if (me !== parseInt(userId)) return <Redirect to={`/settings/${me}`} />;
 	if (loading) return null;
 	const { username, profile } = data.getUser;
 	return (

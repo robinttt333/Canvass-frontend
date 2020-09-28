@@ -14,6 +14,7 @@ const NotificationWrapper = styled.div`
 const Notification = () => {
 	const { loading, data } = useQuery(GET_ALL_NOTIFICATIONS);
 	if (loading) return null;
+
 	const allNotifications = data.getAllNotifications;
 	const friendRequestNotifications = allNotifications.filter(
 		({ object }) => object === "friend request"

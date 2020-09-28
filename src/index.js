@@ -29,7 +29,7 @@ ReactDOM.render(
 				<PrivateRoute path="/group/new/" component={NewGroup} />
 				<PrivateRoute path="/group/:groupId" component={Group} />
 				<PrivateRoute path="/chat/:userId?" component={Chat} />
-				<PrivateRoute path="/notifications/:userId?" component={Notification} />
+				<PrivateRoute path="/notifications/" component={Notification} />
 			</Switch>
 		</Router>
 	</ApolloProvider>,

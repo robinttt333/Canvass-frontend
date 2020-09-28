@@ -119,9 +119,7 @@ const FriendRequests = () => {
 					})}
 					<Dropdown.Item style={{ textAlign: "center" }}>
 						<b>
-							<Link to={`/notifications/${getUserfromCookie().userId}`}>
-								Show all
-							</Link>
+							<Link to={`/notifications`}>Show all</Link>
 						</b>
 					</Dropdown.Item>
 				</Dropdown.Menu>

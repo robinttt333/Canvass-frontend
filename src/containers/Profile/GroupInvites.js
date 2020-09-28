@@ -89,10 +89,7 @@ const GroupInvites = () => {
 			<Header as="h3">
 				<Icon name="group" style={{ display: "inline" }} />
 				My Active Group Invites (
-				<Link
-					style={{ fontSize: "medium" }}
-					to={`/notifications/${getUserfromCookie().userId}`}
-				>
+				<Link style={{ fontSize: "medium" }} to="/notifications">
 					See all
 				</Link>
 				)
