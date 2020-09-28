@@ -9,6 +9,7 @@ const RightSidebarWrapper = styled.div`
 	right: 0;
 	margin-right: 10px;
 	background: #e6f1f5;
+	overflow-y: auto;
 `;
 
 const RightSidebar = ({ groupId }) => {

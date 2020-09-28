@@ -10,6 +10,14 @@ import { Link } from "react-router-dom";
 import { TOGGLE_USER_JOINED_SUBSCRIPTION } from "../../graphql/User";
 import { getRelativeTime } from "../../util";
 
+const Bubble = ({ on = true }) => (on ? <Green>●</Green> : <Red>●</Red>);
+const Green = styled.span`
+	color: #38978d;
+`;
+
+const Red = styled.span`
+	color: red;
+`;
 const LeftSidebarWrapper = styled.div`
 	background: #e6f1f5;
 	height: 100%;
@@ -124,6 +132,7 @@ const LeftSidebar = ({ user }) => {
 											fontSize: ".2em",
 										}}
 									>
+										<Bubble on={lastSeen === "active now" ? true : false} />{" "}
 										<LastSeen lastSeen={lastSeen} />
 									</small>
 								</Menu.Item>

@@ -14,6 +14,7 @@ const LeftSidebarWrapper = styled.div`
 	height: 100%;
 	width: 25%;
 	z-index: 1;
+	overflow-y: auto;
 `;
 const LeftSidebar = ({ name, groupId }) => {
 	const history = useHistory();

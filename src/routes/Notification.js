@@ -67,8 +67,12 @@ const Notification = () => {
 								</Feed.Label>
 								<Feed.Content>
 									<Feed.Summary>
-										<Feed.User>{sender.username}</Feed.User> {text} {"  "}{" "}
-										{object}
+										<Feed.User>
+											<Link to={`/profile/${sender.id}`}>
+												{sender.username}
+											</Link>
+										</Feed.User>{" "}
+										{text} {"  "} {object}
 										<Feed.Date>{getRelativeTime(createdAt)}</Feed.Date>
 									</Feed.Summary>
 								</Feed.Content>
