@@ -5,6 +5,7 @@ export const GET_GROUP_QUERY = gql`
 		getGroup(groupId: $groupId) {
 			id
 			name
+			me
 			members
 			description
 			image
@@ -65,6 +66,26 @@ export const GET_GROUP_INVITES = gql`
 	}
 `;
 
+export const GET_GROUP_INVITE = gql`
+	query($groupId: Int!) {
+		getGroupInvite(groupId: $groupId) {
+			id
+			group {
+				name
+				id
+			}
+			sender {
+				id
+				username
+				profile {
+					dp
+				}
+			}
+			createdAt
+		}
+	}
+`;
+
 export const ACCEPT_GROUP_INVITE = gql`
 	mutation($sender: Int!, $groupId: Int!) {
 		acceptGroupInvite(sender: $sender, groupId: $groupId) {
@@ -76,6 +97,14 @@ export const ACCEPT_GROUP_INVITE = gql`
 export const CANCEL_GROUP_INVITE = gql`
 	mutation($sender: Int!, $groupId: Int!) {
 		cancelGroupInvite(sender: $sender, groupId: $groupId) {
+			ok
+		}
+	}
+`;
+
+export const JOIN_GROUP_MUTATION = gql`
+	mutation($groupId: Int!) {
+		joinGroup(groupId: $groupId) {
 			ok
 		}
 	}

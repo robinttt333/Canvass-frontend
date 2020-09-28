@@ -35,13 +35,15 @@ const GroupMembersList = ({ groupId }) => {
 	if (loading) return null;
 	//bring the current user to top of the list
 	const members_ = data.getGroupMembers;
-	let me;
+	let me, members;
 	const membersWithoutMe = members_.filter((member) => {
 		if (member.user.id !== userId) return true;
 		me = member;
 		return false;
 	});
-	const members = [me, ...membersWithoutMe];
+	// I may not be a member of this group
+	if (me) members = [me, ...membersWithoutMe];
+	else members = membersWithoutMe;
 	return (
 		<PlainSegment
 			style={{

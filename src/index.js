@@ -15,6 +15,7 @@ import Settings from "./routes/Settings";
 import Logout from "./routes/Logout";
 import Notification from "./routes/Notification";
 import NewGroup from "./routes/NewGroup";
+import NotFound from "./routes/NotFound";
 
 // Switch added to redirect from login page
 ReactDOM.render(
@@ -30,6 +31,7 @@ ReactDOM.render(
 				<PrivateRoute path="/group/:groupId" component={Group} />
 				<PrivateRoute path="/chat/:userId?" component={Chat} />
 				<PrivateRoute path="/notifications/" component={Notification} />
+				<Route component={NotFound} />
 			</Switch>
 		</Router>
 	</ApolloProvider>,

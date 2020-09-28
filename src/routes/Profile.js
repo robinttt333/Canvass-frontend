@@ -6,10 +6,11 @@ import { Grid, Segment } from "semantic-ui-react";
 import { GET_PROFILE_QUERY } from "../graphql/Profile";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Err from "../components/Err";
+
 const ProfileWrapper = styled.div`
 	padding: 10px;
 `;
-
 const Profile = () => {
 	const { userId } = useParams();
 	const { loading, data } = useQuery(GET_PROFILE_QUERY, {
@@ -18,6 +19,7 @@ const Profile = () => {
 		pollInterval: 500,
 	});
 	if (loading) return null;
+	if (!data) return <Err />;
 	const profile = data.getProfile;
 	return (
 		<ProfileWrapper>

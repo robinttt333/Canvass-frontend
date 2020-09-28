@@ -3,7 +3,8 @@ import React from "react";
 import GroupDescription from "./GroupDescription";
 import NewPost from "../../containers/Post/NewPost";
 import PostList from "../../containers/Post/PostList";
-
+import PrivateGroupWarning from "./PrivateGroupWarning";
+import PublicGroupWarning from "./PublicGroupWarning";
 const GroupWrapper = styled.div`
 	grid-column-start: 2;
 	height: 100%;
@@ -12,6 +13,7 @@ const GroupWrapper = styled.div`
 
 const Group = ({
 	id,
+	me,
 	image,
 	admin,
 	visible,
@@ -19,6 +21,7 @@ const Group = ({
 	description,
 	members,
 	name,
+	refetch,
 }) => {
 	return (
 		<GroupWrapper>
@@ -32,8 +35,14 @@ const Group = ({
 				description={description}
 				visible={visible}
 			/>
-			<NewPost />
-			<PostList />
+			{me ? <NewPost /> : null}
+			{me ? <PostList /> : null}
+			{!me && !visible ? (
+				<PrivateGroupWarning admin={admin} groupId={id} />
+			) : null}
+			{!me && visible ? (
+				<PublicGroupWarning admin={admin} groupId={id} refetch={refetch} />
+			) : null}
 		</GroupWrapper>
 	);
 };

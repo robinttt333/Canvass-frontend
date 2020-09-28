@@ -7,10 +7,11 @@ import { GET_GROUP_QUERY } from "../graphql/Group";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { Loader, Dimmer } from "semantic-ui-react";
+import Err from "../components/Err";
 
 const Group = () => {
 	const { groupId } = useParams();
-	const { loading, data } = useQuery(GET_GROUP_QUERY, {
+	const { loading, data, refetch } = useQuery(GET_GROUP_QUERY, {
 		variables: { groupId: parseInt(groupId) },
 		fetchPolicy: "network-only",
 	});
@@ -21,8 +22,9 @@ const Group = () => {
 			</Dimmer>
 		);
 
+	if (!data) return <Err />;
 	const {
-		getGroup: { id, image, admin, createdAt, description, members, name },
+		getGroup: { me, id, image, admin, createdAt, description, members, name },
 	} = data;
 	const visible = data.getGroup.public;
 	return (
@@ -31,12 +33,14 @@ const Group = () => {
 			<GroupComponent
 				id={id}
 				admin={admin}
+				me={me}
 				createdAt={createdAt}
 				description={description}
 				members={members}
 				name={name}
 				image={image}
 				visible={visible}
+				refetch={refetch}
 			/>
 			<RightSidebar groupId={parseInt(groupId)} />
 		</GroupPageWrapper>

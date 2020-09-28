@@ -8,6 +8,7 @@ import { GET_USER } from "../graphql/User";
 import { useQuery } from "@apollo/client";
 import { getUserfromCookie } from "../util";
 import { Redirect } from "react-router-dom";
+import Err from "../components/Err";
 
 const ProfileSettingsWrapper = styled.div`
 	display: grid;
@@ -26,6 +27,7 @@ const Settings = () => {
 	const me = getUserfromCookie().userId;
 	if (me !== parseInt(userId)) return <Redirect to={`/settings/${me}`} />;
 	if (loading) return null;
+	if (!data) return <Err />;
 	const { username, profile } = data.getUser;
 	return (
 		<ProfileSettingsWrapper>

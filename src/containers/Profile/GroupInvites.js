@@ -9,7 +9,6 @@ import {
 	Icon,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { getUserfromCookie } from "../../util";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import {
 	ACCEPT_GROUP_INVITE,
