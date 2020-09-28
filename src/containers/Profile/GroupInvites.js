@@ -40,19 +40,19 @@ const query = gql`
 `;
 
 const GroupInvites = () => {
-	const { loading, data } = useQuery(GET_GROUP_INVITES);
+	const { loading, data } = useQuery(GET_GROUP_INVITES, { pollInterval: 500 });
 	const [acceptGroupInvite] = useMutation(ACCEPT_GROUP_INVITE);
 	const [cancelGroupInvite] = useMutation(CANCEL_GROUP_INVITE);
 
 	if (loading) return null;
 	const groupInvites = data.getGroupInvites;
 
-	const acceptGroupInviteHandler = async (id, sender, receiver, groupId) => {
+	const acceptGroupInviteHandler = async (id, sender, groupId) => {
 		const {
 			data: {
 				acceptGroupInvite: { ok },
 			},
-		} = await acceptGroupInvite({ variables: { sender, receiver, groupId } });
+		} = await acceptGroupInvite({ variables: { sender, groupId } });
 		if (ok) {
 			const invites = groupInvites.filter(
 				({ id: inviteId }) => inviteId !== id
@@ -65,12 +65,12 @@ const GroupInvites = () => {
 			});
 		}
 	};
-	const cancelGroupInviteHandler = async (id, sender, receiver, groupId) => {
+	const cancelGroupInviteHandler = async (id, sender, groupId) => {
 		const {
 			data: {
 				cancelGroupInvite: { ok },
 			},
-		} = await cancelGroupInvite({ variables: { sender, receiver, groupId } });
+		} = await cancelGroupInvite({ variables: { sender, groupId } });
 		if (ok) {
 			const invites = groupInvites.filter(
 				({ id: inviteId }) => inviteId !== id
@@ -93,7 +93,7 @@ const GroupInvites = () => {
 					style={{ fontSize: "medium" }}
 					to={`/notifications/${getUserfromCookie().userId}`}
 				>
-					See previous
+					See all
 				</Link>
 				)
 			</Header>
@@ -139,7 +139,6 @@ const GroupInvites = () => {
 																acceptGroupInviteHandler(
 																	groupInviteId,
 																	id,
-																	getUserfromCookie().userId,
 																	groupId
 																)
 															}
@@ -153,7 +152,6 @@ const GroupInvites = () => {
 																cancelGroupInviteHandler(
 																	groupInviteId,
 																	id,
-																	getUserfromCookie().userId,
 																	groupId
 																)
 															}

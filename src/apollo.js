@@ -32,6 +32,11 @@ export const cache = new InMemoryCache({
 	typePolicies: {
 		Query: {
 			fields: {
+				getUnreadGroupInviteNotifications: {
+					merge(_, incoming) {
+						return [...incoming];
+					},
+				},
 				getNonGroupAndUninvitedMembers: {
 					merge(_, incoming) {
 						return [...incoming];

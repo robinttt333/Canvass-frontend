@@ -203,3 +203,11 @@ export const NEW_GROUP_INVITE_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const MARK_GROUP_INVITE_NOTIFICATIONS_AS_READ = gql`
+	mutation {
+		markNotificationsAsRead {
+			ok
+		}
+	}
+`;

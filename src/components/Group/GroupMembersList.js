@@ -15,6 +15,7 @@ const GroupMembersList = ({ groupId }) => {
 		variables: { groupId },
 	});
 
+	const userId = getUserfromCookie().userId;
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
 			document: NEW_GROUP_MEMBER_SUBSCRIPTION,
@@ -32,7 +33,15 @@ const GroupMembersList = ({ groupId }) => {
 	}, [groupId]);
 
 	if (loading) return null;
-	const members = data.getGroupMembers;
+	//bring the current user to top of the list
+	const members_ = data.getGroupMembers;
+	let me;
+	const membersWithoutMe = members_.filter((member) => {
+		if (member.user.id !== userId) return true;
+		me = member;
+		return false;
+	});
+	const members = [me, ...membersWithoutMe];
 	return (
 		<PlainSegment
 			style={{
@@ -58,9 +67,7 @@ const GroupMembersList = ({ groupId }) => {
 							<Image avatar src={dp} />
 							<List.Content>
 								<Link to={`/profile/${id}`}>
-									<List.Header>
-										{id === getUserfromCookie().userId ? "me" : username}
-									</List.Header>
+									<List.Header>{username}</List.Header>
 									Joined {getRelativeTime(memberSince)}
 								</Link>
 							</List.Content>

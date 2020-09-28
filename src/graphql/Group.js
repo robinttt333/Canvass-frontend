@@ -66,16 +66,16 @@ export const GET_GROUP_INVITES = gql`
 `;
 
 export const ACCEPT_GROUP_INVITE = gql`
-	mutation($sender: Int!, $receiver: Int!, $groupId: Int!) {
-		acceptGroupInvite(sender: $sender, receiver: $receiver, groupId: $groupId) {
+	mutation($sender: Int!, $groupId: Int!) {
+		acceptGroupInvite(sender: $sender, groupId: $groupId) {
 			ok
 		}
 	}
 `;
 
 export const CANCEL_GROUP_INVITE = gql`
-	mutation($sender: Int!, $receiver: Int!, $groupId: Int!) {
-		cancelGroupInvite(sender: $sender, receiver: $receiver, groupId: $groupId) {
+	mutation($sender: Int!, $groupId: Int!) {
+		cancelGroupInvite(sender: $sender, groupId: $groupId) {
 			ok
 		}
 	}
