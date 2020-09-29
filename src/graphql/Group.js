@@ -15,6 +15,10 @@ export const GET_GROUP_QUERY = gql`
 			}
 			createdAt
 			public
+			tags {
+				value
+				id
+			}
 		}
 	}
 `;
@@ -34,8 +38,18 @@ export const GET_USER_GROUPS = gql`
 `;
 
 export const CREATE_GROUP_MUTATION = gql`
-	mutation($name: String!, $description: String!, $public: Boolean!) {
-		createGroup(name: $name, description: $description, public: $public) {
+	mutation(
+		$name: String!
+		$description: String!
+		$public: Boolean!
+		$tags: [String!]!
+	) {
+		createGroup(
+			name: $name
+			description: $description
+			public: $public
+			tags: $tags
+		) {
 			ok
 			id
 			error {

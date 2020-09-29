@@ -71,6 +71,8 @@ const LeftSidebar = ({ name, groupId }) => {
 						<Grid.Column style={{ textAlign: "right" }}>
 							<Popup
 								content="Create new group"
+								position="top right"
+								basic
 								trigger={
 									<Icon
 										link

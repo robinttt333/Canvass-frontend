@@ -1,5 +1,12 @@
 import React from "react";
-import { Message, Form, Button, Checkbox, Header } from "semantic-ui-react";
+import {
+	Label,
+	Message,
+	Form,
+	Button,
+	Checkbox,
+	Header,
+} from "semantic-ui-react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import PlainSegment from "../components/PlainSegment";
@@ -9,6 +16,7 @@ import ReactMarkdown from "react-markdown";
 import { useFormik } from "formik";
 import { CREATE_GROUP_MUTATION } from "../graphql/Group";
 import { useMutation } from "@apollo/client";
+import TagsInput from "../containers/TagsInput";
 
 const NewGroupWrapper = styled.div`
 	margin: 20px;
@@ -19,6 +27,8 @@ const NewGroup = () => {
 	const [createGroup] = useMutation(CREATE_GROUP_MUTATION);
 	const history = useHistory();
 	const [error, setError] = React.useState(null);
+	//tags
+	const [currentValues, setCurrentValues] = React.useState([]);
 	const formik = useFormik({
 		// reinitialize form whenever initialValues change
 		// This is desirable when a user clicks reply on a comment
@@ -41,9 +51,8 @@ const NewGroup = () => {
 					createGroup: { ok, id, error: err },
 				},
 			} = await createGroup({
-				variables: { name, description, public: !status },
+				variables: { name, description, public: !status, tags: currentValues },
 			});
-			console.log(ok, id, err);
 			setError(err);
 			if (ok) {
 				setError(null);
@@ -101,12 +110,27 @@ const NewGroup = () => {
 							label="Do you want the group to be private ?"
 						/>
 					</Form.Field>
+					<Form.Field>
+						{currentValues.length > 0 && currentValues.length !== 5 ? (
+							<Label pointing="below">Add 5 tags</Label>
+						) : null}
+						<TagsInput
+							currentValues={currentValues}
+							setCurrentValues={setCurrentValues}
+						/>
+					</Form.Field>
 					<Button
 						type="submit"
 						primary
+						style={{ marginTop: "10px" }}
 						onClick={formik.handleSubmit}
 						disabled={
-							!!(formik.errors.name || !formik.touched.name || value === "")
+							!!(
+								formik.errors.name ||
+								!formik.touched.name ||
+								value === "" ||
+								currentValues.length !== 5
+							)
 						}
 					>
 						Create

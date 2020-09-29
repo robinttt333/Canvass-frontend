@@ -24,7 +24,17 @@ const Group = () => {
 
 	if (!data) return <Err />;
 	const {
-		getGroup: { me, id, image, admin, createdAt, description, members, name },
+		getGroup: {
+			me,
+			id,
+			image,
+			admin,
+			createdAt,
+			description,
+			members,
+			name,
+			tags,
+		},
 	} = data;
 	const visible = data.getGroup.public;
 	return (
@@ -42,7 +52,7 @@ const Group = () => {
 				visible={visible}
 				refetch={refetch}
 			/>
-			<RightSidebar groupId={parseInt(groupId)} />
+			<RightSidebar tags={tags} groupId={parseInt(groupId)} />
 		</GroupPageWrapper>
 	);
 };

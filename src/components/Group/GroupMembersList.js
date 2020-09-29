@@ -48,7 +48,7 @@ const GroupMembersList = ({ groupId }) => {
 		<PlainSegment
 			style={{
 				background: "#e6f1f5",
-				height: "100%",
+				height: "70%",
 			}}
 		>
 			<Header>
