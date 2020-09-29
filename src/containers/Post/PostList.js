@@ -19,10 +19,26 @@ const PostList = () => {
 			variables: { groupId: parseInt(groupId) },
 			updateQuery: (prev, { subscriptionData }) => {
 				if (!subscriptionData.data) return prev;
+				// new post appears when a modification is made to the posts in the cache
+				// or a new post is added
 				const newPost = subscriptionData.data.postAdded;
-				return {
-					getPosts: [newPost, ...prev.getPosts],
-				};
+				let found = false;
+				const newPosts = prev.getPosts.map((post) => {
+					if (post.id === newPost.id) {
+						found = true;
+						return newPost;
+					}
+					return post;
+				});
+
+				if (!found)
+					return {
+						getPosts: [newPost, ...prev.getPosts],
+					};
+				else
+					return {
+						getPosts: newPosts,
+					};
 			},
 		});
 		return () => unsubscribe();

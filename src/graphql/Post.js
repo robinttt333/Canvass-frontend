@@ -87,3 +87,43 @@ export const NEW_POST_TO_MY_GROUP_SUBSCRIPTION = gql`
 		}
 	}
 `;
+
+export const LIKE_ADDED_SUBSCRIPTION = gql`
+	subscription($postId: Int!) {
+		likeAdded(postId: $postId) {
+			content
+			createdAt
+			id
+			likes
+			liked
+			author {
+				id
+				username
+				profile {
+					dp
+					id
+				}
+			}
+		}
+	}
+`;
+
+export const LIKE_DELETED_SUBSCRIPTION = gql`
+	subscription($postId: Int!) {
+		likeDeleted(postId: $postId) {
+			content
+			createdAt
+			id
+			likes
+			liked
+			author {
+				id
+				username
+				profile {
+					dp
+					id
+				}
+			}
+		}
+	}
+`;

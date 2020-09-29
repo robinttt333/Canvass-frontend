@@ -1,11 +1,7 @@
 import React from "react";
 import { Icon, Feed } from "semantic-ui-react";
-import { Link, useParams } from "react-router-dom";
-import {
-	GET_POST_QUERY,
-	GET_POSTS_QUERY,
-	TOGGLE_LIKE_MUTATION,
-} from "../../graphql/Post";
+import { Link } from "react-router-dom";
+import { TOGGLE_LIKE_MUTATION } from "../../graphql/Post";
 import { useMutation } from "@apollo/client";
 import CommentListWrapper from "../Comment/CommentListWrapper";
 import { getRelativeTime } from "../../util";
@@ -25,60 +21,10 @@ const PostItem = ({
 		createdAt,
 	},
 }) => {
-	const { groupId } = useParams();
 	const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION);
 	const handleLiked = async (postId) => {
 		toggleLike({
 			variables: { postId },
-			// update cache
-			update: (proxy) => {
-				if (groupId) {
-					const data = proxy.readQuery({
-						query: GET_POSTS_QUERY,
-						variables: { groupId: parseInt(groupId) },
-					});
-					const cachedPosts = data.getPosts;
-					const updatedPosts = cachedPosts.map((post) => {
-						if (post.id === postId) {
-							return {
-								...post,
-								// toggle current like status
-								liked: !post.liked,
-								// change like count accordingly
-								likes: post.liked ? post.likes - 1 : post.likes + 1,
-							};
-						} else return post;
-					});
-					proxy.writeQuery({
-						query: GET_POSTS_QUERY,
-						variables: { groupId: parseInt(groupId) },
-						data: {
-							getPosts: updatedPosts,
-						},
-					});
-				} else {
-					const data = proxy.readQuery({
-						query: GET_POST_QUERY,
-						variables: { postId },
-					});
-					const post = data.getPost;
-					const updatedPost = {
-						...post,
-						// toggle current like status
-						liked: !post.liked,
-						// change like count accordingly
-						likes: post.liked ? post.likes - 1 : post.likes + 1,
-					};
-
-					proxy.writeQuery({
-						query: GET_POST_QUERY,
-						variables: { postId },
-						data: {
-							getPost: updatedPost,
-						},
-					});
-				}
-			},
 		});
 	};
 	return (
