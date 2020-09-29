@@ -20,6 +20,25 @@ export const TOGGLE_LIKE_MUTATION = gql`
 	}
 `;
 
+export const GET_POST_QUERY = gql`
+	query($postId: Int!) {
+		getPost(postId: $postId) {
+			content
+			createdAt
+			id
+			likes
+			liked
+			author {
+				id
+				username
+				profile {
+					dp
+					id
+				}
+			}
+		}
+	}
+`;
 export const GET_POSTS_QUERY = gql`
 	query($groupId: Int!) {
 		getPosts(groupId: $groupId) {
