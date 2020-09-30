@@ -24,8 +24,8 @@ export const GET_UNREAD_MESSAGES_COUNT = gql`
 `;
 
 export const GET_CHAT = gql`
-	query($userId: Int!) {
-		getChat(userId: $userId) {
+	query($userId: Int!, $offset: Int!) {
+		getChat(userId: $userId, offset: $offset) {
 			id
 			content
 			sender {

@@ -1,7 +1,8 @@
 import React from "react";
-import { Comment, Segment } from "semantic-ui-react";
+import { Header, Icon, Comment, Segment } from "semantic-ui-react";
 import { getRelativeTime, getUserfromCookie } from "../../util";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const MessageListWrapper = styled.div`
 	grid-column: 2 / span 1;
@@ -11,7 +12,22 @@ const MessageListWrapper = styled.div`
 	margin-right: 0;
 	overflow: auto;
 `;
-const MessageList = ({ messages }) => {
+
+const Top = ({ hasMore, handleMore }) => {
+	return (
+		<Header style={{ textAlign: "center", margin: "0" }} as="h6">
+			{hasMore ? (
+				<Link onClick={handleMore} to="#">
+					<Icon name="redo" link />
+					More
+				</Link>
+			) : (
+				"No more messages"
+			)}
+		</Header>
+	);
+};
+const MessageList = ({ hasMore, handleMore, messages }) => {
 	const me = getUserfromCookie();
 	//This part is used to scroll to the bottom of the
 	//page automatically once a new message is added
@@ -21,6 +37,7 @@ const MessageList = ({ messages }) => {
 	}, [messages]);
 	return (
 		<MessageListWrapper>
+			<Top hasMore={hasMore} handleMore={handleMore} />
 			<Comment.Group style={{ maxWidth: "100%" }}>
 				{messages.map(
 					({

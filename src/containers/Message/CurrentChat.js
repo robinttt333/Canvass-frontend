@@ -20,12 +20,37 @@ const CurrentChat = ({ user }) => {
 	const userId = user && user.id ? user.id : -1;
 	const username = user && user.username;
 	//check if userId is invalid
-	const { subscribeToMore, loading, data } = useQuery(GET_CHAT, {
+	const { subscribeToMore, loading, data, fetchMore } = useQuery(GET_CHAT, {
 		variables: {
 			userId,
+			offset: 0,
 		},
 		fetchPolicy: "network-only",
 	});
+
+	const [hasMore, setHasMore] = React.useState(true);
+	const handleMore = () => {
+		fetchMore({
+			variables: {
+				offset: data.getChat.length,
+			},
+			updateQuery: (prev, { fetchMoreResult }) => {
+				if (
+					!fetchMoreResult ||
+					!fetchMoreResult.getChat ||
+					!fetchMoreResult.getChat.length ||
+					!handleMore
+				) {
+					setHasMore(false);
+					return prev;
+				}
+				return {
+					getChat: [...fetchMoreResult.getChat, ...prev.getChat],
+				};
+			},
+		});
+	};
+
 	React.useEffect(() => {
 		const unsubscribe = subscribeToMore({
 			document: NEW_MESSAGE_SUBSCRIPTION,
@@ -48,7 +73,11 @@ const CurrentChat = ({ user }) => {
 	return (
 		<React.Fragment>
 			{user && messages.length ? (
-				<MessageList userId={userId} messages={messages} />
+				<MessageList
+					hasMore={hasMore}
+					handleMore={handleMore}
+					messages={messages}
+				/>
 			) : null}
 			{user && messages.length === 0 ? (
 				<HeaderWrapper>
