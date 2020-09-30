@@ -40,8 +40,8 @@ export const GET_POST_QUERY = gql`
 	}
 `;
 export const GET_POSTS_QUERY = gql`
-	query($groupId: Int!) {
-		getPosts(groupId: $groupId) {
+	query($groupId: Int!, $offset: Int!) {
+		getPosts(groupId: $groupId, offset: $offset) {
 			content
 			createdAt
 			id
